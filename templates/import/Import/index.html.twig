@@ -1,0 +1,58 @@
+{% extends 'admin/template.html.twig' %}
+
+{% block title %}WMS-/WFS-Import{% endblock %}
+
+{% block content %}
+    <div class="grid content-title">
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <h1 class="title dm">{% trans %}WMS/WFS Import{% endtrans %}</h1>
+            </div>
+            <div class="col c-1-2 text-right">
+                <a href="{{ path('metador_admin_import') }}" class="btn medium">
+                    <span class="icon-sign-out"></span> Übersicht
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="line-separator" />
+
+    <div class="page-content">
+        <form action="{{ path('webservice_url_import') }}" method="post" >
+            <div class="grid space content-title">
+                <div class="row r-2">
+                    <div class="col c-1-2">
+                        <label class="form-label" for="source">Datenquelle</label>
+                        <div class="form-field-wrapper">
+                            <select class="select" id="source" name="source">
+                                {% for source in sources %}
+                                    {%  if not source.system %}
+                                    <option value="{{ source.slug }}">{{ source.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col c-1-2">
+                        <label class="form-label" for="profile">Profil</label>
+                        <div class="form-field-wrapper">
+                            <select class="select" id="profile" name="profile">
+                                {% for key, profile in profiles %}
+                                    {%  if profile['active'] %}
+                                        <option value="{{ key }}">{{ profile['name'] }} ({{ profile['origin'] }})</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <label class="form-label" for="wms-upload">Mindestens eine WMS/WFS GetCapabilities URL</label>
+            <div class="form-field-wrapper margin-b">
+                <textarea id="wms-upload" class="textarea" name="urls"></textarea>
+            </div>
+            <button class="btn" type="submit">importieren</button>
+        </form>
+    </div>
+{% endblock %}

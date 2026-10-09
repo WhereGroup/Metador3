@@ -1,0 +1,31 @@
+.idea
+
+docker/volumes/postgresql
+docker/volumes/solr/logs
+docker/volumes/solr/log4j2.xml
+docker/volumes/solr/data/metadata/data
+docker/volumes/solr/data/address/data
+
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/cache
+/var/share
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
+
+assets/typescript/**/*.d.ts
+assets/typescript/**/*.d.ts.map
+
+var/temp

@@ -1,0 +1,8 @@
+metador_documentation:
+    active: true
+    origin: WhereGroup
+    type: manual
+    name: Benutzerhandbuch
+    description: Benutzerhandbuch und Entwickler-Dokumentation
+    version: '1.0'
+    template_path: manual

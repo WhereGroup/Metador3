@@ -1,0 +1,54 @@
+{% extends 'admin/template.html.twig' %}
+
+{% block title %}CSW Harvester{% endblock %}
+
+{% block content %}
+    <div class="grid content-title">
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <h1 class="title dm">{% trans %}CSW-Harvester{% endtrans %}</h1>
+            </div>
+            <div class="col c-1-2 text-right">
+                <a href="{{ path('metador_admin_harvester_new') }}" class="btn info medium">
+                    <span class="icon-plus"></span> {% trans %}Neu{% endtrans %}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="line-separator"/>
+
+    <table class="table bordered">
+        <thead>
+        <tr>
+            <th>{% trans %}Titel{% endtrans %}</th>
+            <th>{% trans %}Quelle{% endtrans %}</th>
+            <th colspan="2">{% trans %}Count{% endtrans %}</th>
+            <th class="icon-column">#</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in rows %}
+            <tr class="-js-harvester-parent">
+                <td><a href="{{ path('metador_admin_harvester_edit', { id: row.id }) }}">{{ row.title }}</a></td>
+                <td>{{ row.source }}</td>
+                <td class="icon-column"><span class="icon-loop2 pointer -js-get-harvest-hits" data-id="{{ row.id }}"></span></td>
+                <td class="-js-harvester-hits">&nbsp;</td>
+                <td class="icon-column process">
+                    {% set handle = 'harvest-' ~ row.id %}
+                    <form action="{{ path('metador_admin_harvester_run', { id: row.id, handle: handle }) }}" data-bg-process="{{ handle }}" method="post">
+                        <button type="submit" class="btn no-style" data-bg-process-button="" disabled>
+                            <span class="icon-pause" data-bg-process-icon="icon-play"></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+{#    <script src="{{ asset('bundles/cswharvester/csw-harvester.js') }}"></script>#}
+{% endblock %}

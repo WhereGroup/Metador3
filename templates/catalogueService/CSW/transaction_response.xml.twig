@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:TransactionResponse
+        xmlns:ows="http://www.opengis.net/ows"
+        xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        version="2.0.2"
+        xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd">
+    <csw:TransactionSummary{%  if ta.requestId is not null %} requestId="{{ ta.requestId }}"{% endif %}>
+        <csw:totalInserted>{{ ta.inserted }}</csw:totalInserted>
+        <csw:totalUpdated>{{ ta.updated }}</csw:totalUpdated>
+        <csw:totalDeleted>{{ ta.deleted }}</csw:totalDeleted>
+    </csw:TransactionSummary>
+</csw:TransactionResponse>

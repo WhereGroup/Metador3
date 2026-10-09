@@ -1,0 +1,46 @@
+{% macro topic_one(value) %}
+    <tr>
+        <th colspan="2" class="view-header-one">{{ value }}</th>
+    </tr>
+{% endmacro %}
+
+{% macro topic_two(value) %}
+    <tr>
+        <th colspan="2" class="view-row-one view-header-one">{{ value|trans }}</th>
+    </tr>
+{% endmacro %}
+
+{% macro topic_three(value) %}
+    <tr><td colspan="2" class="html-gap pdf-gap"></td></tr>
+    <tr><td colspan="2" class="view-row-two view-header-two">{{ value|trans }}</td></tr>
+    <tr><td colspan="2" class="html-gap pdf-gap"></td></tr>
+{% endmacro %}
+
+{% macro line(label, value) %}
+    {% if array_has_value(value) %}
+    <tr>
+        <td class="view-property-label view-header-three" style="width: 40%;">{{ label|trans }}</td>
+        <td class="view-property" style="width: 60%;">{{ value }}</td>
+    </tr>
+    {% endif %}
+{% endmacro %}
+
+{% macro multiline_value(label, value) %}
+    {% if array_has_value(value) %}
+    <tr>
+        <td class="view-property-label view-header-three" style="width: 40%;">{{ label|trans }}</td>
+        <td class="view-property" style="width: 60%;">{% for val in value %}{{ val }}<br>{% endfor %}
+        </td>
+    </tr>
+    {% endif %}
+{% endmacro %}
+
+{% macro multiline_keyvalue(label, value) %}
+    {% if array_has_value(value) %}
+        <tr>
+            <td class="view-property-label view-header-three" style="width: 40%;">{{ label|trans }}</td>
+            <td class="view-property" style="width: 60%;">{% for val in value %}{% for v in val %}{{ v }}<br>{%  endfor %}{% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+{% endmacro %}

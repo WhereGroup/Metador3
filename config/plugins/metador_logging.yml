@@ -1,0 +1,25 @@
+metador_logging:
+    active: true
+    origin: WhereGroup
+    name: Logging
+    description: Logging Bundle für Metador
+    template_path: logging
+    version: 1.0.0
+    settings:
+        log_level:
+            default: ERROR
+            type: choice
+            label: Protokollierungsstufe
+            description: Mögliche Werten sind (info, warning, error).
+            value: ERROR
+            options:
+                - DEBUG
+                - INFO
+                - WARNING
+                - ERROR
+        log_paging:
+            default: 10
+            type: string
+            label: Anzahl Logs pro Seite
+            description: Mögliche Werten sind (Numerischer Wert).
+            frontend: true

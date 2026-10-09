@@ -1,0 +1,17 @@
+#!/bin/sh
+set -eu
+
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+proxy_env_file="$script_dir/../.env.proxy.local"
+
+if [ ! -f "$proxy_env_file" ]; then
+    echo "Missing local proxy file: $proxy_env_file" >&2
+    exit 1
+fi
+
+set -a
+. "$proxy_env_file"
+set +a
+
+exec docker compose "$@"
+

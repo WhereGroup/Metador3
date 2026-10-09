@@ -1,0 +1,108 @@
+{
+    "_cmd": {
+        "_addNamespaces": {
+            "wfs": "http://www.opengis.net/wfs/2.0",
+            "gml": "http://www.opengis.net/gml/3.2",
+            "fes": "http://www.opengis.net/fes/2.0",
+            "ows": "http://www.opengis.net/ows/1.1",
+            "xsd": "http://www.w3.org/2001/XMLSchema",
+            "xsi": "http://www.w3.org/2001/XMLSchema-instance",
+            "xlink": "http://www.w3.org/1999/xlink"
+        },
+        "_removeEmptyValues": true,
+        "_sortResult": true
+    },
+    "p": {
+        "_path": "/*",
+        "_data": {
+            "contact": {
+                "_asArray": true,
+                "_path": "ows:ServiceProvider",
+                "_data": {
+                    "individualName": "ows:ServiceContact/ows:IndividualName/text()",
+                    "organisationName": "ows:ProviderName/text()",
+                    "email": ["ows:ServiceContact/ows:ContactInfo/ows:Address/ows:ElectronicMailAddress/text()", "_asArray"],
+                    "deliveryPoint": "ows:ServiceContact/ows:ContactInfo/ows:Address/ows:DeliveryPoint/text()",
+                    "city": "ows:ServiceContact/ows:ContactInfo/ows:Address/ows:City/text()",
+                    "administrativeArea": "ows:ServiceContact/ows:ContactInfo/ows:Address/ows:AdministrativeArea/text()",
+                    "postalCode": "ows:ServiceContact/ows:ContactInfo/ows:Address/ows:PostalCode/text()",
+                    "country": "ows:ServiceContact/ows:ContactInfo/ows:Address/ows:Country/text()",
+                    "voice": "ows:ServiceContact/ows:ContactInfo/ows:Phone/ows:Voice/text()",
+                    "facsimile": "ows:ServiceContact/ows:ContactInfo/ows:Phone/ows:Facsimile/text()"
+                }
+            },
+            "responsibleParty": {
+                "_asArray": true,
+                "_path": "ows:ServiceProvider",
+                "_data": {
+                    "role": [null, "string", "pointOfContact"],
+                    "individualName": "ows:ServiceContact/ows:IndividualName/text()",
+                    "organisationName": "ows:ProviderName/text()",
+                    "electronicMailAddress": "ows:ServiceContact/ows:ContactInfo/ows:Address/ows:ElectronicMailAddress/text()",
+                    "deliveryPoint": "ows:ServiceContact/ows:ContactInfo/ows:Address/ows:DeliveryPoint/text()",
+                    "city": "ows:ServiceContact/ows:ContactInfo/ows:Address/ows:City/text()",
+                    "administrativeArea": "ows:ServiceContact/ows:ContactInfo/ows:Address/ows:AdministrativeArea/text()",
+                    "postalCode": "ows:ServiceContact/ows:ContactInfo/ows:Address/ows:PostalCode/text()",
+                    "country": "ows:ServiceContact/ows:ContactInfo/ows:Address/ows:Country/text()",
+                    "voice": "ows:ServiceContact/ows:ContactInfo/ows:Phone/ows:Voice/text()",
+                    "facsimile": "ows:ServiceContact/ows:ContactInfo/ows:Phone/ows:Facsimile/text()"
+                }
+            },
+            "title": "ows:ServiceIdentification/ows:Title/text()",
+            "alternateTitle": "ows:ServiceIdentification/ows:XXXXX/text()",
+            "abstract": "ows:ServiceIdentification/ows:Abstract/text()",
+            "keyword": {
+                "_asArray": true,
+                "_path": "ows:ServiceIdentification/ows:Keywords",
+                "_function": "replaceKey",
+                "_data": {
+                    "#KEY#": [null, "string", "WFS"],
+                    "date": [null, "date", "Y-m-d"],
+                    "type": [null, "string", "creation"],
+                    "value": ["ows:Keyword/text()", "_asArray"]
+                }
+            },
+            "useLimitation": ["ows:ServiceIdentification/ows:AccessConstraints/text()", "_asArray"],
+            "onlineResource": ["ows:ServiceProvider/ows:ServiceContact/ows:ContactInfo/ows:OnlineResource/@xlink:href", "_asArray"],
+            "containsOperationsName": [null, "string", "GetCapabilities"],
+            "containsOperationsDCP": [null, "string", "WebService"],
+            "containsOperationsURL": "ows:OperationsMetadata/ows:Operation[@name='GetCapabilities']/ows:DCP/ows:HTTP/ows:Get/@xlink:href",
+            "metadataLanguage": [null, "string", "ger"],
+            "metadataStandardName": [null, "string", "19119"],
+            "metadataStandardVersion": [null, "string", "2005/PDAM 1"],
+            "hierarchyLevel": [null, "string", "service"],
+            "hierarchyLevelName": [null, "string", "Darstellungsdienste"],
+            "serviceType": [null, "string", "view"],
+            "serviceTypeVersion": [null, "string", "2.0.0"],
+            "transferOptions": {
+                "_asArray": false,
+                "_path": "ows:ServiceProvider/ows:ServiceContact/ows:ContactInfo",
+                "_data": {
+                    "url": "ows:OnlineResource/@xlink:href"
+                }
+            },
+            "useConstraints": {
+                "_asArray": true,
+                "_path": "ows:ServiceIdentification",
+                "_data": {
+                    "otherConstraints": "ows:Fees/text()"
+                }
+            },
+            "accessConstraints": {
+                "_asArray": true,
+                "_path": "ows:ServiceIdentification",
+                "_data": {
+                    "otherConstraints": "ows:AccessConstraints/text()"
+                }
+            },
+            "bbox": {
+                "_asArray": true,
+                "_path": "wfs:FeatureTypeList/wfs:FeatureType/ows:WGS84BoundingBox",
+                "_data": {
+                    "lowerCorner": "ows:LowerCorner/text()",
+                    "upperCorner": "ows:UpperCorner/text()"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{% for item in applicationGet('app-global-menu') %}
+    {% if item.raw is defined %}
+        {{ item.raw|raw }}
+         INCLUDE CONTENT
+    {% elseif item.template is defined %}
+        {{ include(item.template, item.params) }}
+
+         USE TEMPLATE
+    {% else %}
+        <a href="{{ path(item.path, item.params) }}" class="header-menu-item button {% if item.active is defined and item.active %}active{% endif %}"
+           {% if item.target is defined %}target="{{ item.target }}"{% endif %}
+            {% if item.title is defined %}title="{{ item.title }}"{% endif %}
+        >
+            {% if item.icon is defined %}
+                <span class="{{ item.icon }}"></span>
+            {% endif %}
+            {{ item.label|trans }}
+        </a>
+    {% endif %}
+{% endfor %}
+
+{% include 'theme/userMenu.html.twig' %}
+

@@ -1,0 +1,25 @@
+{% if public is not defined %}
+    {% set public = false %}
+{% endif %}
+{% if groups is not defined %}
+    {% set groups = [] %}
+{% endif %}
+<div class="metadata-info{% if public %} public{% endif %}" data-element="metadata-info">
+    <div class="metadata-info-menu">
+        <span class="icon-earth metadata-info-public" data-cmd="metadata-toggle-public"></span>
+        <span class="metadata-info-public-title">{% trans %}öffentlich{% endtrans %}</span>
+        <span class="metadata-info-public-title-private">{% trans %}privat{% endtrans %}</span>
+        <input type="hidden" name="p[_public]" data-element="metadata-public" value="{% if public %}1{% else %}0{% endif %}" />
+        <span class="icon-cog metadata-info-roles" data-cmd="metadata-toggle-roles"></span>
+    </div>
+    <ul class="metadata-info-roles-list" data-element="metadata-info-roles">
+        {% for id, group in groups %}
+        <li title="{{ group.name|groupname|teaser(22, 1) }}">
+            {% if hasGroupAccess %}
+            <input type="checkbox" name="p[_group_id][]" value="{{ id }}" title="" {% if group.active %}checked="checked"{% endif %}/>
+            {% endif %}
+            {{ group.name|groupname|teaser(22, 1) }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordsResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd">
+    {% if getrecords.requestId is defined %}
+        <csw:RequestId>{{ timestamp }}</csw:RequestId>
+    {% endif %}
+    <csw:SearchStatus timestamp="{{ timestamp }}"/>
+    {% if getrecords.resultType == 'hits' or matched == 0 %}
+    <csw:SearchResults numberOfRecordsMatched="{{ matched }}" numberOfRecordsReturned="{{ records|length }}"
+                       elementSet="{{ getrecords.elementSetName }}" nextRecord="{{ nextrecord }}"/>
+    {% else %}
+    <csw:SearchResults numberOfRecordsMatched="{{ matched }}" numberOfRecordsReturned="{{ records|length }}"
+                       elementSet="{{ getrecords.elementSetName }}" nextRecord="{{ nextrecord }}">
+        {% for record in records %}
+            {% set p = record.object %}
+            {% if p['_profile'] is defined and templates[p['_profile']] is defined %}
+                {% include templates[p['_profile']] with { 'p': p } %}
+            {% endif %}
+        {% endfor %}
+    </csw:SearchResults>
+    {% endif %}
+</csw:GetRecordsResponse>

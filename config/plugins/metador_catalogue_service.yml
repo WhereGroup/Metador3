@@ -1,0 +1,71 @@
+metador_catalogue_service:
+    active: true
+    origin: WhereGroup
+    name: 'Catalogue Service'
+    description: 'Catalogue Service'
+    version: '1.0'
+    template_path: catalogueService
+    settings:
+        title:
+            type: string
+            label: Titel
+            description: CSW Titel
+        abstract:
+            type: text
+            label: Beschreibung
+            description: CSW Beschreibiung
+        providerName:
+            type: string
+            label: Betreiber
+            description: CSW Betreiber
+        providerSite:
+            type: string
+            label: Webseite des Betreibers
+            description: Webseite des CSW Betreibers
+        individualName:
+            type: string
+            label: Zuständige Person
+            description: Zuständige Person für den CSW
+        positionName:
+            type: string
+            label: Position
+            description: Position der zuständigen Person
+        phoneVoice:
+            type: string
+            label: Telefon
+            description: Telefon
+        phoneFacsimile:
+            type: string
+            label: Fax
+            description: Fax
+        deliveryPoint:
+            type: string
+            label: Straße
+            description: Straße
+        city:
+            type: string
+            label: Ort
+            description: Ort
+        postalCode:
+            type: string
+            label: PLZ
+            description: PLZ
+        administrativeArea:
+            type: string
+            label: Bundesland
+            description: Bundesland
+        country:
+            type: string
+            label: Land
+            description: Land
+        electronicMailAddress:
+            type: string
+            label: E-Mail
+            description: E-Mail
+        filter:
+            type: text
+#            type: json
+            label: Filter
+            description: Filter
+            default: '{ "eq": {"public": 1}}'
+#            default: { eq: { public: 1 } }

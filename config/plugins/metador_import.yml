@@ -1,0 +1,7 @@
+metador_import:
+    active: true
+    origin: WhereGroup
+    name: 'Import/Export'
+    description: 'Ermöglicht das importieren und exportieren von Metadaten'
+    version: '1.0'
+    template_path: import

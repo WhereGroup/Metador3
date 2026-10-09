@@ -1,0 +1,274 @@
+{% extends 'admin/template.html.twig' %}
+
+{#{% if form.vars.value.slug is defined and form.vars.value.slug is not empty#}
+{#and form.vars.value.source is defined and form.vars.value.source is not empty %}#}
+{% if action == 'edit' %}
+    {% set title  = 'Catalogue Service bearbeiten'|trans %}
+    {% set path   = 'metador_admin_csw_edit' %}
+    {% set params = {slug: form.vars.value.slug, source: form.vars.value.source} %}
+{% else %}
+    {% set title  = 'Catalogue Service erstellen'|trans %}
+    {% set path   = 'metador_admin_csw_new' %}
+    {% set params = {} %}
+{% endif %}
+
+{% block content %}
+    <div class="grid content-title">
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <h1 class="title dm">{{ title }}</h1>
+            </div>
+            <div class="col c-1-2 text-right">
+                <a href="{{ path('metador_admin_csw') }}" class="btn medium">
+                    <span class="icon-sign-out"></span> {% trans %}Übersicht{% endtrans %}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="line-separator"/>
+
+    {{ form_start(form, { 'action': path(path, params), 'method': 'POST', 'attr': {
+        novalidate: 'novalidate', autocomplete: 'off'
+    }}) }}
+
+    {% if not form.vars.valid %}
+        <div class="notify error">
+            {{ form_errors(form) }}
+            {{ form_errors(form.slug) }}
+            {{ form_errors(form.source) }}
+            {{ form_errors(form.username) }}
+        </div>
+    {% endif %}
+
+    <div class="grid space responsive">
+        <div class="row r-2">
+            <div class="col c-1-3">
+                <div>{{ form_label(form.active, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.active, { 'attr': {'class': 'select'}}) }}
+                </div>
+            </div>
+            <div class="col c-2-3">
+                <div>
+                    {{ form_label(form.title, null, { 'label_attr': {'class': 'form-label'}}) }}
+                </div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.title, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row r-3">
+            <div class="col c-1-3">
+                <div>{{ form_label(form.slug, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {% if form.vars.value.slug is defined and form.vars.value.slug is not empty %}
+                        {{ form_widget(form.slug, { 'attr': {'class': 'input', 'readonly': 'readonly'}}) }}
+                    {% else %}
+                        {{ form_widget(form.slug, { 'attr': {'class': 'input'}}) }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col c-1-3">
+                <div>{{ form_label(form.source, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.source, { 'attr': {'class': 'select'}}) }}
+                </div>
+            </div>
+            <div class="col c-1-3">
+                <div>{{ form_label(form.username, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.username, { 'attr': {'class': 'select'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row r-1">
+            <div class="col c-1">
+                <div>{{ form_label(form.abstract, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.abstract, { 'attr': {'class': 'textarea'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row r-1">
+            <div class="col c-1">
+                <div>{{ form_label(form.keywords, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.keywords, { 'attr': {'class': 'textarea'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <div>{{ form_label(form.fees, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.fees, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+            <div class="col c-1-2">
+                <div>{{ form_label(form.accessConstraints, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.accessConstraints, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <div>{{ form_label(form.providerName, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.providerName, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+            <div class="col c-1-2">
+                <div>{{ form_label(form.providerSite, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.providerSite, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <div>{{ form_label(form.individualName, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.individualName, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+            <div class="col c-1-2">
+                <div>{{ form_label(form.positionName, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.positionName, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <div>{{ form_label(form.phoneVoice, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.phoneVoice, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+            <div class="col c-1-2">
+                <div>{{ form_label(form.phoneFacsimile, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.phoneFacsimile, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <div>{{ form_label(form.city, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.city, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+            <div class="col c-1-2">
+                <div>{{ form_label(form.deliveryPoint, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.deliveryPoint, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <div>{{ form_label(form.postalCode, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.postalCode, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+            <div class="col c-1-2">
+                <div>{{ form_label(form.administrativeArea, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.administrativeArea, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <div>{{ form_label(form.country, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.country, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+            <div class="col c-1-2">
+                <div>{{ form_label(form.electronicMailAddress, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.electronicMailAddress, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <div>{{ form_label(form.onlineResourse, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.onlineResourse, { 'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+            <div class="col c-1-2"></div>
+        </div>
+        <div class="row r-1">
+            <div class="col c-1">
+                <div>{{ form_label(form.filter, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form.filter, { 'attr': {'class': 'textarea'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row r-1">
+            <div class="col c-1">
+                {{ form_widget(form.seriesAsDataset, { 'attr': {'class': 'checkbox'}}) }} {{ form_label(form.seriesAsDataset, null, { 'label_attr': {'class': 'form-label'}}) }}
+            </div>
+        </div>
+
+        <h2>CSW-T</h2>
+
+        <div class="row r-3">
+            <div class="col c-1-3">
+                {{ form_widget(form.insert, { 'attr': {'class': 'checkbox'}}) }} {{ form_label(form.insert, null, { 'label_attr': {'class': 'form-label'}}) }}
+            </div>
+            <div class="col c-1-3">
+                {{ form_widget(form.update, { 'attr': {'class': 'checkbox'}}) }} {{ form_label(form.update, null, { 'label_attr': {'class': 'form-label'}}) }}
+            </div>
+            <div class="col c-1-3">
+                {{ form_widget(form.delete, { 'attr': {'class': 'checkbox'}}) }} {{ form_label(form.delete, null, { 'label_attr': {'class': 'form-label'}}) }}
+            </div>
+        </div>
+
+        <hr class="line-separator"/>
+
+        {% for hierarchy_level in get_setting('hierarchy_levels', 'plugin', 'metador_core') %}
+            {% if loop.first or loop.index % 3 == 0 %}
+                <div class="row r-2">
+            {% endif %}
+
+            <div class="col c-1-2">
+                <div>{{ form_label(form[hierarchy_level], null, { 'label_attr': {'class': 'form-label'}}) }} {% trans %}Mapping beim Import{% endtrans %}</div>
+                <div class="form-field-wrapper">
+                    {{ form_widget(form[hierarchy_level], { 'attr': {'class': 'select'}}) }}
+                </div>
+            </div>
+
+            {% if loop.last or loop.index % 2 == 0 %}
+                </div>
+            {% endif %}
+        {%  endfor %}
+
+        <hr class="line-separator"/>
+
+        <div class="row r-1">
+            <div class="col c-1 text-right">
+                <button class="btn success medium">
+                    <span class="icon-checkmark"></span> {% trans %}speichern{% endtrans %}
+                </button>
+                {% if form.vars.value.slug is defined and form.vars.value.slug is not empty
+                and form.vars.value.source is defined and form.vars.value.source is not empty %}
+                    <a href="{{ path('metador_admin_csw_confirm', params) }}" class="btn error medium">
+                        <span class="icon-bin2"></span> {% trans %}löschen{% endtrans %}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}
+

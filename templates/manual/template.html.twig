@@ -1,0 +1,52 @@
+{#{% extends 'theme/template.html.twig' %}#}
+{% extends 'theme/template_base.html.twig' %}
+
+{% block center %}
+    <div class="center menu">
+        <div class="center-left">
+            <div class="left-menu-content">
+                <ul class="left-menu">
+                    {% for item in applicationGet('app-manual-menu', null, null, true) %}
+                        {% set active = app.request.get('manual') == item.label ? true : false %}
+                        <li class="menu-item {% if active %}act{% endif %}">
+                            <a href="{{ path(item.path, item.params) }}"{% if item.target is defined and item.target %} target="{{ item.target }}"{% endif %}>
+                                {% if item.icon is defined %}
+                                    <span class="{{ item.icon }}"></span>
+                                {% endif %}
+                                {{ item.label }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="center-right">
+            <div class="content">
+                <h1>{% block manualTitle %}{% endblock %}</h1>
+                {% block manualMenu %}{% endblock %}
+                {% block content %}
+                    {% if manual is not defined %}
+                        {% set manual = 'Anwenderhandbuch' %}
+                    {% endif %}
+                    <div class="text-right">
+                        <a href="{{ path('manual_index', { manual: manual }) }}" class="btn">zurück</a>
+                    </div>
+                {% endblock %}
+                {% markdown %}{% block manual %}{% endblock %}{% endmarkdown %}
+                {% if app.environment == 'dev' %}
+                {% markdown %}{% block devmanual %}{% endblock %}{% endmarkdown %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block css %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('manual') }}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('manual') }}
+{% endblock %}

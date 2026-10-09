@@ -1,0 +1,182 @@
+.light-normal {
+  color: #444;
+  background-color: #f7f7f7;
+  border: 1px solid #e1e1e1; }
+
+.light-normal:hover {
+  background-color: #f4f4f4;
+  border: 1px solid #dedede; }
+
+.light-info {
+  color: #444;
+  background-color: #e5f3ff;
+  border: 1px solid #b2dbff; }
+
+.light-info:hover {
+  background-color: #e0f1ff;
+  border: 1px solid #add9ff; }
+
+.light-warning {
+  background-color: #fdf4df;
+  border: 1px solid #fae4af; }
+
+.light-warning:hover {
+  background-color: #fdf3da;
+  border: 1px solid #fae3aa; }
+
+.light-success {
+  color: #444;
+  background-color: #d9f0d3;
+  border: 1px solid #b8e4ad; }
+
+.light-success:hover {
+  background-color: #d6efcf;
+  border: 1px solid #b5e2a9; }
+
+.light-error {
+  color: #444;
+  background-color: #f6cacc;
+  border: 1px solid #ef9ea3; }
+
+.light-error:hover {
+  background-color: #f6c5c8;
+  border: 1px solid #ef999f; }
+
+.dark-info > a, .dark-success > a, .dark-warning > a, .dark-error > a {
+  color: #fff; }
+
+.dark-normal {
+  color: #444;
+  background-color: #f7f7f7;
+  border: 1px solid #e1e1e1; }
+
+.dark-normal:hover {
+  background-color: #eaeaea;
+  border: 1px solid #d4d4d4; }
+
+.dark-info {
+  color: #fff;
+  background-color: #4dacfe;
+  border: 1px solid #1a94fe; }
+
+.dark-info:hover {
+  background-color: #1a94fe;
+  border: 1px solid #0188fd; }
+
+.dark-success {
+  color: #fff;
+  background-color: #77ca60;
+  border: 1px solid #59b93e; }
+
+.dark-success:hover {
+  background-color: #59b93e;
+  border: 1px solid #4fa637; }
+
+.dark-warning {
+  color: #fff;
+  background-color: #f5c44e;
+  border: 1px solid #f2b41e; }
+
+.dark-warning:hover {
+  background-color: #f2b41e;
+  border: 1px solid #e9a90d; }
+
+.dark-error {
+  color: #fff;
+  background-color: #d2222d;
+  border: 1px solid #a61b24; }
+
+.dark-error:hover {
+  background-color: #a61b24;
+  border: 1px solid #90171f; }
+
+.md .no-user-select, .md .switch-row .switch-label, .switch-row .md .switch-label, .md .center > .center-right > .profile-content-menu > .content-menu-list > .content-menu-list-item {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.md .text-center {
+  text-align: center; }
+
+.switch-row {
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer; }
+
+.switch-row .switch-label {
+  font-size: 0.8em; }
+
+.switch-row > .icon-toggle-off {
+  color: #aaa;
+  vertical-align: middle; }
+
+.switch-row > .icon-toggle-on {
+  color: #4dacfe;
+  vertical-align: middle; }
+
+.address-row {
+  cursor: pointer; }
+
+.md .center > .center-right > .profile-content-title {
+  height: 35px;
+  line-height: 35px; }
+
+.md .center > .center-right > .profile-content-title > .profile-content-title-level {
+  font-style: italic; }
+
+.md .center > .center-right > .profile-content-title > .profile-content-title-text {
+  font-weight: bold; }
+
+.md .center > .center-right > .profile-content-menu {
+  height: 30px;
+  line-height: 30px;
+  position: relative;
+  z-index: 2; }
+
+.md .center > .center-right > .profile-content-menu > .content-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 30px;
+  display: none; }
+
+.md .center > .center-right > .profile-content-menu > .content-menu-list.act {
+  display: block; }
+
+.md .center > .center-right > .profile-content-menu > .content-menu-list > .content-menu-list-item {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  border: 1px solid #e1e1e1;
+  border-bottom-width: 0;
+  background-color: #f7f7f7;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  font-size: .9em; }
+
+.md .center > .center-right > .profile-content-menu > .content-menu-list > .content-menu-list-item.act.error, .md .center > .center-right > .profile-content-menu > .content-menu-list > .content-menu-list-item.error {
+  box-shadow: inset 0 2px 0 #d2222d; }
+
+.md .center > .center-right > .profile-content-menu > .content-menu-list > .content-menu-list-item.act {
+  bottom: -1px;
+  background-color: #fff;
+  box-shadow: inset 0 2px 0 #008ec0; }
+
+.md .center > .center-right > .profile-content {
+  padding: 20px 40px;
+  border: 1px solid #e1e1e1;
+  border-radius: 2px;
+  background-color: #fefefe;
+  overflow-y: scroll;
+  z-index: 1;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.03);
+  position: absolute;
+  top: 65px;
+  left: 0;
+  right: 0;
+  bottom: 10px; }

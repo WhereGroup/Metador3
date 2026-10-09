@@ -1,0 +1,40 @@
+{
+    "devDependencies": {
+        "@babel/core": "^7.17.0",
+        "@babel/preset-env": "^7.16.0",
+        "@symfony/webpack-encore": "^6.0.0",
+        "@types/ol": "^7.0.0",
+        "@types/proj4": "^2.19.0",
+        "core-js": "^3.38.0",
+        "file-loader": "^6.2.0",
+        "imports-loader": "^5.0.0",
+        "regenerator-runtime": "^0.13.9",
+        "sass": "^1.100.0",
+        "sass-loader": "^17.0.0",
+        "ts-loader": "^9.6.0",
+        "typescript": "^6.0.3",
+        "webpack": "^5.72",
+        "webpack-cli": "^6.0.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^7.2.0",
+        "jquery": "^3.7.1",
+        "jquery-form": "^4.3.0",
+        "ol": "^10.10.0",
+        "proj4": "^2.21.0",
+        "zebra_datepicker": "^2.2.0"
+    },
+    "overrides": {
+        "jquery-form": {
+            "jquery": "$jquery"
+        }
+    }
+}

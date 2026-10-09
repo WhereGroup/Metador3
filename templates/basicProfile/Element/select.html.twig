@@ -1,0 +1,81 @@
+{% if name is not defined or p is not defined %}
+    <div class="notify error">
+        The options <strong>name, label</strong> and <strong>p</strong> are required!
+    </div>
+{% else %}
+    {% set id = name|md_id %}
+    {% set type = type is defined ? type : 'mandatory' %}
+    {% set default = default is defined ? default : '' %}
+    {% set class = class is defined ? class : '' %}
+    {% set validatorSources = validatorSources is defined ? validatorSources : '' %}
+    {% if value is not defined %}
+        {% set value = array_get(p, name|md_array_path, default, true) %}
+    {% endif %}
+    {% set hasList = hasList is defined and hasList == 1 ? true : false %}
+    {% set sort = sort is defined ? sort : null %}
+    {% set direction = direction is defined ? direction : null %}
+    {% set dataAttributes = "" %}
+    {% set showHelp = help is not defined or help != false ? true : false %}
+    {% set showListEdit = hasList and is_granted('ROLE_SYSTEM_GEO_OFFICE') ? true : false %}
+
+    {% if readonly is not defined %}
+        {% set readonly = false %}
+    {% endif %}
+
+    {% set iconCount = 3 %}
+
+    {% if not showListEdit %}
+        {% set iconCount = iconCount -1 %}
+    {% endif %}
+
+    {% if not showHelp %}
+        {% set iconCount = iconCount -1 %}
+    {% endif %}
+
+    {% if data is defined and data is iterable %}
+        {% for attributeName, attribute in data  %}
+            {% set dataAttributes = dataAttributes ~ ' data-' ~ attributeName ~ '=' ~ attribute ~ '' %}
+        {% endfor %}
+    {% endif %}
+
+    {% if hasList %}
+        {% set options = get_list_options(array_get(p, '_profile'), name|md_obj_id, defaultList is defined ? defaultList : {}, sort, direction) %}
+    {% elseif options is not defined or options is empty %}
+        <div class="notify error">
+            <strong>hasList</strong> or <strong>options</strong> for <strong><code>{{ name }}</code></strong> required!
+        </div>
+    {% endif %}
+
+    {% if label is defined and label is not empty %}
+        <label for="{{ id }}" class="form-label">{{ label }}:</label>
+    {% endif %}
+
+    <div class="form-field-wrapper i{{ iconCount }} -js-validation-wrapper {% if readonly is defined and readonly == true %}readonly{% endif %}">
+        {% if type != null %}
+            <span class="form-icon-type icon-{{ type }} rs left -js-validation-icon" data-validation-icon="icon-{{ type }}"></span>
+        {% endif %}
+
+        {% if readonly is defined and readonly == true %}
+            <input type="hidden" name="{{ name }}" id="{{ id }}" value="{{ value }}" />
+            <input value="{{ value }}" class="input -js-user-input" {{ name|md_data_obj }} readonly />
+        {% else %}
+            <select name="{{ name }}" id="{{ id }}" class="select -js-user-input {{ class }}" data-validator-source="{{ validatorSources }}" {{ name|md_data_obj }} {{ dataAttributes }}>
+                {% for optionValue, optionLabel in options  %}
+                    {% if optionLabel is iterable %}
+                        <option value="{{ optionValue }}" {{ md_select(value, optionValue) }} data-fields="{{ optionLabel|json_encode }}">{{ optionValue }}</option>
+                    {% else %}
+                        <option value="{{ optionValue }}" {{ md_select(value, optionValue) }}>{{ optionLabel }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        {% endif %}
+
+        {% if showHelp %}
+        <span class="form-icon icon-question2 -js-show-help" {{ name|md_data_obj }} title="{{ name }}"></span>
+        {% endif %}
+
+        {% if showListEdit %}
+            <a href="{{ path('metador_admin_lists_show', { 'profile': array_get(p, '_profile'), 'key': name|md_obj_id }) }}" target="_blank" class="form-icon icon-cog"></a>
+        {% endif %}
+    </div>
+{% endif %}

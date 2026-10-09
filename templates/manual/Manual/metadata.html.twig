@@ -1,0 +1,81 @@
+{% extends 'manual/template.html.twig' %}
+
+{% block manual %}
+# Übersicht Metadaten
+
+In dieser Übersicht werden die jeweiligen Metadatensätze mit ihren Eigenschaften dargestellt:
+
+- dem Titel,
+- der Kurzbeschreibung
+- dem Thumbnail (falls vorhanden)
+
+Die Statusleiste zeigt:
+
+- Das Erdkugel-Symbol ist nur dann sichtbar, wenn der Datensatz öffentlich ist.
+- Das Ausrufezeichen sagt, dass der Datensatz nicht valide ist.
+- Das Kalender-Symbol zeigt, sobald man sich darüber mit der Maus bewegt, das Datum der letzten Änderung.
+- Falls der Datensatz sich in der Quarantäne befindet, wird die jeweilge Instanz aus der er stammt angezeigt (hier: Intern)
+- Die Art des Metadatensatzes (hier: Service)
+
+Die Aktionen, die auf dem Metadatensatz ausgeführt werden können, sind:
+
+- Mit einem Klick auf den Titel kann der jeweilige Metadatensatz editiert werden.
+- Mit einem Klick auf den PDF Link kann der jeweilige Metadatensatz als PDF angezeigt werden.
+- Mit einem Klick auf den XML Link kann der jeweilige Metadatensatz als XML angezeigt werden.
+- Mit einem Klick auf den HTML Link kann der jeweilige Metadatensatz als HTML angezeigt werden.
+
+# Einen neuen Datensatz anlegen
+
+Auf der Startseite kann per Klick auf `erstellen` das Profil ausgewählt werden welches angelegt werden soll. Werden keine Profile angezeigt, so müssen diese in der Administration unter `Einstellungen` erst für die jeweilige Datenquelle aktiviert werden.
+
+# Speichern / Beenden der Editiersitzung
+
+Wenn Sie Ihre Editiersitzung beenden möchten, haben Sie mehrere Möglichkeiten dies zu tun.
+
+In dem linken Bereich sind die Operationen aufgelistet, die auf den Datensatz angewandt werden können. Die Möglichkeiten beim Speichern sind in einem Dropdown-Feld hinterlegt. Folgende Möglichkeiten stehen zur Verfügung.
+
+- Speichern und beenden: Speichert den Datensatz, schließt die Editiersession und kehrt zum Ausgangsbildschirm zurück.
+- Zwischenstand speichern: Speichert den Datensatz und verbleibt im Editor. Eine Validierung nach den auzufüllenden Feldern wird nicht durchgeführt.
+- Abbrechen: Verwirft die gemachten Änderungen und kehrt zum Ausgangsbildschirm zurück.
+- Löschen: Löscht den Datensatz und alle verbundenen Datensätze.
+
+> Beachten Sie bitte, dass der Datensatz für die Dauer der aktuellen Session gesperrt sein wird (5 bis 10 Minuten), wenn Sie den Browser einfach beenden oder sich ausloggen, während der Datensatz noch geöffnet ist. Das System kann nicht erkennen, ob Sie nicht noch weiter editieren wollten oder nicht. Beenden Sie Ihre Editiersitzung also immer mit den oben gelisteten Speichern/Abbrechen Befehlen und kehren Sie zur Ergebnisliste zurück.
+
+# Freigabe und Validierung
+
+In der linken Leiste, neben dem Thumbnail-Icon, können die Freigabe und Validierungsoptionen der aktuellen Editiersitzung angegeben werden.
+
+- Freigabe: Ist dieser Schalter aktiviert, wird der Datensatz für die Suche freigegeben. Der Benutzer signalisiert damit, dass er mit seiner Editierung fertig.
+- Validierung: Validiert den Datensatz nach festgelegten Regeln hinsichtlich verpflichtender und optionaler Felder und der Art und Weise, wie sie ausgefüllt werden müssen
+
+# Verfügbarkeit in Gruppen
+
+Unterhalb der Freigabe und Validierungsschalter befinden sich die allgemeinen Angaben zu dem Metadatensatz, die automatisch vergeben werden und an denen der Benutzer die Verfügbarkeit einstellen kann.
+
+# Weitere Informationen
+
+- HierarchyLevel: Zeigt das HierarchyLevel des aktuellen Metadatendokuments an. Dieses wird automatisch vergeben/erkannt.
+- UUID: Eindeutiger Identifikator des Metadatensatzes. (`gmd:fileIdentifier`). Der fileIdentifier wird u.a. bei einer CSW-GetRecordByID Abfrage verwendet.
+- Verfügbar in Gruppen: Der angemeldete Benutzer ist Mitglied einer oder mehrerer Gruppen. Der Datensatz kann für diese Gruppen verfügbar geschaltet werden, so dass andere Mitglieder dieser Gruppen den Datensatz ebenfalls editieren können.
+- Metadaten:: Informationen, wer den Datensatz erstellt und zuletzt bearbeitet hat.
+
+# Gesperrte Datensätze
+
+Benutzer, die in einer Gruppe sind dürfen die Metadatensätze ihrer Gruppe editieren. Datensätze, die aber durch einen anderen Benutzer der gleichen Gruppe geöffnet sind, können nicht gleichzeitig editiert werden. Der editierende Benutzer muss den Datensatz zuerst schließen, entweder durch „Abbrechen“ oder durch „Speichern und Beenden“.
+
+Ist der Datensatz gerade in einer Editiersitzung eines anderen Nutzers geöffnet, wird dies in der Oberfläche angezeigt. In der Ergebnisliste ist das durch das Schloß-Symbol gekennzeichnet. Der Datensatz ist dezeitig durch eine Editiersitzung gesperrt.
+
+
+
+# Löschen aller Metadaten
+
+{% if is_granted('ROLE_SYSTEM_SUPERUSER') %}
+
+Mit folgendem Befehl, können aus dem Terminal heraus, alle Metadaten gelöscht werden.
+
+```bash
+    bin/console metador:truncate:metadata
+```
+{% endif %}
+{% endblock %}
+

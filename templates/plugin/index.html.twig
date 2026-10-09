@@ -1,0 +1,56 @@
+{% extends 'admin/template.html.twig' %}
+
+{% block title %}{% trans %}Plugins{% endtrans %}{% endblock %}
+
+{% block content %}
+    <div class="grid content-title">
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <h1 class="title dm">{% trans %}Plugins{% endtrans %}</h1>
+            </div>
+            <div class="col c-1-2 text-right">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+
+    <hr class="line-separator" />
+
+    {% for origin, originPlugins in plugins %}
+    <table class="table bordered margin-b">
+        <thead>
+            <tr>
+                <th colspan="3">{{ origin }}</th>
+                <th>{{ originPlugins|length }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for key, plugin in originPlugins %}
+            <tr title="v {{ plugin['version'] }} {% if plugin['type'] is defined %} - Type: {{ plugin['type'] }}{% endif %}{% if plugin['tags'] is defined %} - Tags: {% for tag in plugin['tags'] %}{{ tag }} {% endfor %}{% endif %}">
+                <td class="icon-column">
+                    <input type="hidden" id="{{ key }}" name="plugin[{{ key }}]" value="{% if plugin['active'] %}1{% else %}0{% endif %}" />
+                    <div class="" data-id="{{ key }}">
+                        {% if plugin['active'] %}
+                            <span class="icon-toggle-on"></span>
+                        {% else %}
+                            <span class="icon-toggle-off"></span>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>{{ plugin['name']|trans }}</td>
+                <td>{{ plugin['description']|trans }}</td>
+                <td class="icon-column">
+                    {% if plugin['settings'] is defined and plugin['active']%}
+                        <a href="{{ path('metador_admin_settings', { fragment: key }) }}#{{ key }}">
+                            <span class="icon-cog"></span>
+                        </a>
+                    {% else %}
+                        <span class="icon-cog disabled"></span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+{% endblock %}

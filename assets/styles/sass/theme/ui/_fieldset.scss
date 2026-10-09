@@ -1,0 +1,161 @@
+@import '../config';
+@import '../mixins';
+@import '../extensions';
+
+.md .settings {
+    margin-bottom: $normal-item-padding;
+
+    & > .label {
+        font-weight: bold;
+        padding: $padding/2;
+        background-color: darken($background, 5%);
+        border: 1px solid darken($background, 10%);
+        @include normal-item();
+    }
+
+    & > .content {
+        padding: $normal-item-padding;
+        background-color: lighten($background, 1%);
+        border: 1px solid $border;
+        border-top-width: 0;
+    }
+
+    &.small {
+        margin-bottom: $small-item-padding;
+
+        & > .label {
+            @include small-item();
+        }
+
+        & > .content {
+            padding: $small-item-padding;
+            font-size: $font-small;
+        }
+    }
+}
+
+.md .fieldset {
+    border: 1px solid $border;
+    margin-bottom: $padding;
+    border-radius: 4px;
+    @extend .clearfix;
+
+    & > .head {
+        cursor: pointer;
+        font-weight: bold;
+        background-color: $background;
+        border-radius: 4px;
+        @include normal-item(false, false);
+
+        &:hover {
+            background-color: darken($background, 2%);
+        }
+
+        & > .status {
+            float: right;
+            width: $normal-item-height;
+            color: darken($background, 15%);
+            text-align: center;
+            @extend .no-user-select;
+            @include normal-item(false, false);
+        }
+
+        & > .title {
+            float: left;
+            font-size: 1.4em;
+            @extend .no-user-select;
+            @include normal-item(false);
+        }
+
+        & > .info {
+            float: right;
+            font-size: 1em;
+            color: darken($border, 30%);
+            @extend .no-user-select;
+            @include normal-item(false);
+        }
+
+        & > .right {
+            float: right;
+            padding-right: 10px;
+        }
+    }
+
+    & > .content {
+        padding: $padding;
+    }
+
+    &:not(.minimize) > .head {
+        border-bottom: 1px solid $border;
+    }
+
+    &.active:not(.minimize) {
+        border: 1px solid $warning;
+    }
+
+    &.active:not(.minimize) > .head {
+        border-bottom: 1px solid $warning;
+    }
+
+    &.minimize > .content {
+        display: none;
+    }
+}
+
+.md .fieldset2 {
+    border: 1px solid $border;
+    margin-bottom: $padding;
+    border-radius: 4px;
+    @extend .clearfix;
+
+    & > .head {
+        font-weight: bold;
+        background-color: $background;
+        border-radius: 4px;
+        border-bottom: 1px solid $border;
+
+        @include medium-item(false, false);
+
+        & > .left {
+            float: left;
+            font-size: 1.0em;
+            color: $font;
+            @extend .no-user-select;
+            @include medium-item(false);
+        }
+
+        & > .right {
+            float: right;
+            padding-right: 10px;
+        }
+    }
+
+    & > .rows {
+        @extend .clearfix;
+
+        & > .row {
+            position: relative;
+            @extend .clearfix;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid $border;
+            }
+
+            & > .row-content {
+                float: left;
+                @include calc('width', '100% - #{$medium-item-height}');
+                padding: $padding / 2;
+            }
+
+            & > .row-icon {
+                float: right;
+                width: $medium-item-height;
+            }
+        }
+
+    }
+}
+
+.md .fieldset > .content.no-p {
+    padding: 0;
+}

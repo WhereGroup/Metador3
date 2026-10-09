@@ -1,0 +1,35 @@
+{% extends 'theme/template_base.html.twig' %}
+
+{% block css %}
+    {{ encore_entry_link_tags('manual') }}
+{#    {% if app.environment == 'dev' %}#}
+{#        {{ encore_entry_link_tags('app_dev') }}#}
+{#    {% else %}#}
+{#        {{ encore_entry_link_tags('app') }}#}
+{#    {% endif %}#}
+{% endblock %}
+
+
+{% block javascript %}
+{#{{ parent() }}#}
+{#{% if app.environment == 'dev' %}#}
+{#    {{ encore_entry_script_tags('app_dev') }}#}
+{#{% else %}#}
+{#    {{ encore_entry_script_tags('app') }}#}
+{#{% endif %}#}
+{% endblock %}
+
+{% block center %}
+<style>
+    .html-gap{
+        height: 10px;
+    }
+</style>
+<div class="center">
+    <div class="center-right">
+        <div class="content">
+            {% include 'basicProfile/Export/view.html.twig' %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% include 'theme/template/paging.html.twig' with { 'paging': response.paging } %}
+
+<table class="table bordered medium">
+    {% for log in response.logs %}
+        {% set status = 'info' %}
+        {% set icon   = 'question2' %}
+
+        {% if log.type == 'success' %}
+            {% set status = 'success' %}
+            {% set icon   = 'checkmark' %}
+        {% elseif log.type == 'error' %}
+            {% set status = 'error' %}
+            {% set icon   = 'cross' %}
+        {% elseif log.type == 'warning' %}
+            {% set status = 'warning' %}
+            {% set icon   = 'exclamation' %}
+        {% elseif log.type == 'debug' %}
+            {% set status = 'debug' %}
+            {% set icon   = 'bug' %}
+        {% endif %}
+        <tr>
+            <td class="log-message-type {{ status }}" title="{{ log.identifier }}">
+                {% if log.path is defined and log.path is not empty %}
+                    <a href="{{ path(log.path, log.params) }}" target="_blank">
+                        <span class="icon-{{ icon }}"></span>
+                    </a>
+                {% else %}
+                    <span class="icon-{{ icon }}"></span>
+                {% endif %}
+            </td>
+            <td class="log-categories">
+                {{ log.category|capitalize }}
+
+                {% if log.subcategory is not empty %}
+                    <span class="log-categories-icon icon-chevron-right"></span>
+                    {{ log.subcategory|capitalize }}
+                {% endif %}
+
+                {% if log.operation is not empty %}
+                    <span class="log-categories-icon icon-chevron-right"></span>
+                    {{ log.operation|capitalize }}
+                {% endif %}
+            </td>
+            <td>{{ log.dateTime|date('d.m.Y H:i:s') }}</td>
+            <td class="text-center">{{ log.username }}</td>
+        </tr>
+        <tr><td colspan="4" class="log-message-row">{{ log.message }}</td></tr>
+    {% endfor %}
+</table>
+
+{% include 'theme/template/paging.html.twig' with { 'paging': response.paging } %}

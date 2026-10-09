@@ -1,0 +1,111 @@
+$schema: https://json-schema.org/draft/2019-09/schema
+$id: ''
+type: object
+title: Metador Metadaten
+description: Metador Metadaten
+properties:
+    id:
+        title: Identifikator
+        description: Identifikator des Metadatensatzes
+        type: string
+        format: uuid
+    fileIdentifier:
+        title: File-Identifikator
+        description: File-Identifikator des Metadatensatzes
+        type: string
+        format: uuid
+#    identifier:
+#        title: Identifikator
+#        description: Identifikator des Record
+#        type: string
+#        format: uuid
+    title:
+        title: Titel
+        description: Titel des Record
+        type: string
+        minLength: 1
+    description:
+        title: Beschreibung
+        description: A free-text description of the resource described by this record.
+        type: string
+        minLength: 1
+#    abstract:
+#        title: Beschreibung
+#        description: A free-text description of the resource described by this record.
+#        type: string
+#        minLength: 1
+#    subject:
+#        title: Subject
+#        description: Subject des Metadatensatzes
+#        type: string
+#        minLength: 1
+#    anyText:
+#        title: Suchbegriff
+#        description: Suchbegriff des Metadatensatzes
+#        type: string
+#        minLength: 1
+    hierarchyLevel:
+        title: Hierarchieebene
+        description: Hierarchieebene des Metadatensatzes
+        type: string
+        enum:
+            - dataset
+            - service
+            - series
+            - tile
+    topicCategory:
+        title: Thematische Einordnung
+        description: Thematische Einordnung des Metadatensatzes
+        type: string
+        minLength: 1
+#        enum: []
+    created:
+        title: Erstellt
+        description: The date this record was created in the server
+        type: string
+        format: date
+    updated:
+        title: Aktualisiert
+        description: The most recent date on which the record was changed.
+        type: string
+        format: date
+#    language:
+#        title: Sprache
+#        description: The language used for textual values (i.e., titles, descriptions, etc.) of this record.
+#        type: string
+#        const: ger
+#    languages:
+#        title: Sprachen
+#        description: The list of other languages in which this record is available.
+#        type: array
+#        minItems: 1
+#        maxItems: 1
+#        items:
+#            type: string
+#            const: ger
+    keywords:
+        title: Schlüsselwörter
+        description: A list of free-form keywords or tags associated with the resource described by this record.
+        type: array
+        minItems: 1
+        items:
+            type: string
+            minLength: 1
+    geometry:
+        $ref: https://geojson.org/schema/Polygon.json
+#    conformsTo
+#    links
+#    linkTemplates
+#    type
+#    time
+#    themes:
+#        title: Themen
+#        description: The language used for textual values (i.e., titles, descriptions, etc.) of this record.
+#        type: string
+#        const: ger
+#    resourceLanguages
+#    externalIds
+#    formats
+#    contacts
+#    license
+#    rights

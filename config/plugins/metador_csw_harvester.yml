@@ -1,0 +1,13 @@
+metador_csw_harvester:
+    active: true
+    origin: WhereGroup
+    name: 'CSW Harvester'
+    description: 'Plugin to harvest data from other CSW'
+    version: '1.0'
+    template_path: cswHarvester
+#    settings:
+#        filter:
+#            type: text
+#            label: Filter
+#            description: Filter
+#            default: '{"Constraint": "<ogc:Or><ogc:PropertyIsEqualTo><ogc:PropertyName>hierarchyLevel<\/ogc:PropertyName><ogc:Literal>dataset<\/ogc:Literal><\/ogc:PropertyIsEqualTo><ogc:PropertyIsEqualTo><ogc:PropertyName>hierarchyLevel<\/ogc:PropertyName><ogc:Literal>service<\/ogc:Literal><\/ogc:PropertyIsEqualTo><\/ogc:Or>"}'

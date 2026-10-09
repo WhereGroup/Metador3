@@ -1,0 +1,105 @@
+@import "../config";
+
+.md .map-dialog .map {
+    & .ol-control button{
+        background-color: $primary;
+    }
+
+    & .ol-scale-line{
+        background-color: $primary;
+        opacity: 0.6;
+    }
+
+    & .ol-control.ol-zoom {
+        right: 8px;
+        left: auto;
+        top: 28px;
+    }
+
+    & .ol-control.ol-zoom-extent {
+        right: 8px;
+        left: auto;
+        top: 96px;
+    }
+
+    & .ol-control.drag-zoom {
+        top: 128px;
+        right: 8px;
+    }
+
+    & .ol-control.feature-info {
+        top: 158px;
+        right: 8px;
+    }
+
+    & .ol-control .success:before {
+        color: lighten($primary, 20%);
+    }
+
+    & .ol-scale-line {
+        left: auto;
+        right: 8px;
+    }
+
+    & .tooltip {
+        position: relative;
+        background: $primary;
+        padding: 4px 0;
+        border-radius: 4px;
+        color: $white;
+        white-space: nowrap;
+        border: darken($primary, 20%) 1px solid;
+
+        & span {
+            display: block;
+            cursor: pointer;
+            font-weight: normal;
+            color: lighten($primary, 20%);
+            &.selected {
+                color: $white;
+            }
+        }
+
+        & > .icon-cross {
+            position: absolute;
+            top: 1px;
+            right: 0px;
+            font-size: 10px;
+            color: $white;
+            background-color: $primary;
+        }
+        & > .content {
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0 4px;
+            // pseudo selectors started with "-webkit" are not supported at ff although caniuse.com
+            //&::-webkit-scrollbar {
+            //    width: 0.5em;
+            //}
+            //&::-webkit-scrollbar-track {
+            //    -webkit-box-shadow: inset 0 0 6px $white;
+            //}
+            // only for firefox
+            scrollbar-color: $white $primary;
+            // only for chromium
+            &::-webkit-scrollbar-thumb {
+                background-color: $white;
+            }
+        }
+    }
+
+    & .tooltip:before {
+        border-top: 6px solid rgba(0, 0, 0, 0.5);
+        border-right: 6px solid transparent;
+        border-left: 6px solid transparent;
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        margin-left: -7px;
+        left: 50%;
+        border-top-color: $primary;
+    }
+    & .tooltip.hidden {
+        display: none;
+    }
+}

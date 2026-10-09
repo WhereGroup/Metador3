@@ -1,0 +1,41 @@
+@import 'theme/config';
+@import 'theme/extensions';
+
+.md .table {
+    & .log-message-row {
+        border-bottom: 2px solid $primary;
+        padding: $padding;
+        line-height: $small-item-height;
+    }
+
+    & .log-categories {
+        font-weight: bold;
+    }
+
+    & .log-categories-icon {
+        vertical-align: middle;
+        color: lighten($font, 40%);
+    }
+
+    & tbody > tr > td.log-message-type {
+        width: $normal-item-height;
+        padding: 0;
+        text-align: center;
+
+        &.success {
+            @extend .light-success;
+        }
+
+        &.warning {
+            @extend .light-warning;
+        }
+
+        &.error {
+            @extend .light-error;
+        }
+
+        &.info {
+            @extend .light-info;
+        }
+    }
+}

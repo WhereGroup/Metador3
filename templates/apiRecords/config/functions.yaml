@@ -1,0 +1,232 @@
+# synchronize this document with the reader class App\Subscriber\ApiREcords\Component\OgcApiCqlJsonFilterReader
+functions:
+    -   name: and
+        returns:
+            - boolean
+        arguments:
+            -   title: left
+                type:
+                    - boolean
+            -   title: right
+                type:
+                    - boolean
+
+    -   name: or
+        returns:
+            - boolean
+        arguments:
+            -   title: left
+                type:
+                    - boolean
+            -   title: right
+                type:
+                    - boolean
+
+    -   name: not
+        returns:
+            - boolean
+        arguments:
+            -   title: logicValue
+                type:
+                    - boolean
+
+    -   name: isNull
+        returns:
+            - boolean
+        arguments:
+            -   title: string
+                type:
+                    - string
+                    - number
+                    - integer
+                    - datetime
+                    - boolean
+                    - geometry
+
+    -   name: like
+        returns:
+            - boolean
+        arguments:
+            -   title: string
+                type:
+                    - string
+            -   title: regex
+                type:
+                    - string
+#            -   title: escapeChar
+#                type:
+#                    - string
+#                    - null
+#            -   title: singleChar
+#                type:
+#                    - string
+#                    - null
+#            -   title: wildCard
+#                type:
+#                    - string
+#                    - null
+
+    -   name: '<>'
+        returns:
+            - boolean
+        arguments:
+            -   title: a
+                type:
+                    - string
+                    - number
+                    - integer
+                    - datetime
+                    - boolean
+            -   title: b
+                type:
+                    - string
+                    - number
+                    - integer
+                    - datetime
+                    - boolean
+
+    -   name: in
+        returns:
+            - boolean
+        arguments:
+            -   title: a
+                type:
+                    - string
+                    - number
+                    - integer
+                    - datetime
+                    - boolean
+            -   title: b
+                type:
+                    - array
+
+    -   name: '<='
+        returns:
+            - boolean
+        arguments:
+            -   title: a
+                type:
+                    - number
+                    - date
+            -   title: b
+                type:
+                    - number
+                    - date
+
+    -   name: '>='
+        arguments:
+            -   title: a
+                type:
+                    - number
+                    - integer
+                    - datetime
+            -   title: b
+                type:
+                    - number
+                    - integer
+                    - datetime
+
+    -   name: '='
+        returns:
+            - boolean
+        arguments:
+            -   title: a
+                type:
+                    - string
+                    - number
+                    - integer
+                    - datetime
+                    - boolean
+            -   title: b
+                type:
+                    - string
+                    - number
+                    - integer
+                    - datetime
+                    - boolean
+
+    -   name: '<'
+        returns:
+            - boolean
+        arguments:
+            -   title: a
+                type:
+                    - number
+                    - integer
+                    - datetime
+            -   title: b
+                type:
+                    - number
+                    - integer
+                    - datetime
+
+    -   name: '>'
+        arguments:
+            -   title: a
+                type:
+                    - number
+                    - integer
+                    - datetime
+            -   title: b
+                type:
+                    - number
+                    - integer
+                    - datetime
+
+    -   name: between
+        arguments:
+            -   title: a
+                type:
+                    - number
+                    - integer
+                    - datetime
+            -   title: lower
+                type:
+                    - number
+                    - integer
+                    - datetime
+            -   title: upper
+                type:
+                    - number
+                    - integer
+                    - datetime
+
+    - name: s_contains
+      returns:
+          - boolean
+      arguments:
+          - title: geometry1
+            type:
+                - geometry
+          - title: geometry2
+            type:
+                - geometry
+
+    - name: s_intersects
+      returns:
+          - boolean
+      arguments:
+          - title: geometry1
+            type:
+                - geometry
+          - title: geometry2
+            type:
+                - geometry
+
+    - name: s_within
+      returns:
+          - boolean
+      arguments:
+          - title: geometry1
+            type:
+                - geometry
+          - title: geometry2
+            type:
+                - geometry
+#    - name: trim
+#      returns:
+#            -   string
+#      arguments:
+#            - title: string
+#              type:
+#                  - string

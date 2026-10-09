@@ -1,0 +1,30 @@
+{% extends 'admin/template.html.twig' %}
+
+{% block content %}
+    <div class="grid padding responsive">
+        {% for item in applicationGet('app-information') %}
+            {% if loop.index0 % 4 == 0 %}
+                <div class="row r-4">
+            {% endif %}
+                <div class="col c-1-4">
+                    <div class="app-info" title="{{ item.label|trans }}">
+                        <div class="app-info-head">
+                            <span class="app-info-icon {{ item.icon }}"></span> {{ item.label|trans|teaser(13, true) }}
+                        </div>
+                        {% if item.count is defined %}
+                            <div class="app-info-count" title="{{ item.count }}">{{ item.count }}</div>
+                        {% endif %}
+
+                        {% if item.content is defined %}
+                            {{ item.content|raw }}
+                        {% elseif item.path is defined %}
+                            {% include item.path %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% if loop.index % 4 == 0 %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

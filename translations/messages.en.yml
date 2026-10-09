@@ -1,0 +1,101 @@
+Dashboard: Dashboard
+Administration: Administration
+Übersicht: Index
+healthcheck_success_message: "System ok."
+healthcheck_error_message: "Some problems detected."
+healthcheck_title: "Health-Check"
+healthcheck_table_origin: "Origin"
+healthcheck_table_message: "Message"
+healthcheck_folder_not_writeable: "Write access for **%path%**"
+healthcheck_folder_exists: "Folder **%path%** exists"
+healthcheck_reachability: "Reachability of **%service%**"
+healthcheck_database_connection_error: "Database connection"
+command_init_db_add_group: "Added group %group%"
+command_init_db_add_user: "Added user %user% with password %password%"
+command_init_db_add_group_to_user: "Added user %user% to group %group%"
+command_init_db_user_exists: "User %user% exists"
+'Bitte warten': 'Please wait'
+'Seite neu laden': 'Reload site'
+Konfiguration: Configuration
+Cache: Cache
+Assets: Assets
+Datenbank: Database
+Plugins: Plugins
+zurück: back
+plugin_command_reset_title: "Reset plugin configuration"
+plugin_command_reset_confirm: "Reset plugin configuration?"
+plugin_command_reset_success: "Configuration successfully resetted!"
+plugin_command_disable_title: "Disable Plugin"
+plugin_command_enable_title: "Enable Plugin"
+plugin_command_list_title: "List Plugins"
+plugin_not_found: "Plugin %key% not found!"
+finished_successfully: "Finished successfully"
+'Metadaten XML-Datei': 'Metadata XML-File'
+importieren: Import
+'Metadaten importieren': 'Import metadata'
+'Import und Export von Metadaten': 'Import and export of metadata'
+'Ermöglicht das importieren von Metadaten': 'Allows you to import metadata'
+Import: Import
+abmelden: 'log out'
+Profile: Profiles
+Version: Version
+Benutzer: User
+Kennwort: Password
+login: login
+'Metadatenerfassung für Alle': 'Collection of metadata for everyone'
+'Erzeugen, Bearbeiten, Validieren und Exportieren von INSPIRE-konformen Metadatensätzen für Daten und Dienste': 'Creating, editing, validating and exporting of INSPIRE-compliant metadatasets for data and services'
+'Als Demonutzer angemeldet, steht Ihnen die volle Funktionalität von MeTaDor2 zur Verfügung. Ihre Daten können von allen anderen Demonutzern betrachtet und editiert werden': 'Registered as a demo user, you have full access to all MeTaDor2 features. Your data may be viewed and edited by all other demo users.'
+'Nutzen Sie die Schnittstelle der GDI-DE Testsuite um Ihre Metadaten auf Konformität zu den Standards zu testen': 'Use the GDI-DE Testsuite gateway to check your metadata for compliance to standards'
+'Demo Benutzer': 'Demo User'
+Seite: Page
+von: of
+Titel: Title
+Datum: Date
+Uhrzeit: Time
+bearbeiten: edit
+'Gruppe löschen': 'Delete Group'
+löschen: delete
+abbrechen: cancel
+Gruppen: Groups
+'Bestehende Gruppen löschen / bearbeiten': 'Delete / edit groups'
+Gruppe: Group
+'Neue Gruppe erstellen': 'Create new group'
+erstellen: create
+Benutzername: Username
+'Benutzer bearbeiten': 'Edit user'
+speichern: save
+Email: Email
+Isactive: 'Is active'
+Neu: New
+
+hierarchy_level: 'Hierarchy level'
+unknown_error: "An unknown error occurred"
+'Suchbegriff eingeben': 'Enter search term'
+'Karte anzeigen/ausblenden': 'toggle map'
+'Startseite': homepage
+logout: logout
+'Passwort ändern': 'change password'
+Datensatz: Dataset
+Dienst: Service
+Tools: Tools
+'Filter zurücksetzen': 'reset filter'
+'CSV-Download': 'CSV-Download'
+Sortierung: Sorting
+Zeitstempel: Timestamp
+'Datum von': 'Date from'
+'Datum bis': 'Date to'
+
+Adressen: Addresses
+'API Records': 'API Records'
+Auswahllisten: 'Selection lists'
+'Schlüsselwörter': 'Keywords'
+'Catalogue Service': 'Catalogue Service'
+Einstellungen: Settings
+Selbsttest: 'self-test'
+Datenquellen: 'Data sources'
+Seiten: Pages
+'CSW Harvester': 'CSW Harvester'
+'Import/Export': 'Import/Export'
+Logging: Logging
+Hintergrundkarte: 'Background map'
+Speichern: Save

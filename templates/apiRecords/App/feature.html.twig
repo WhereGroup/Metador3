@@ -1,0 +1,14 @@
+{% extends 'apiRecords/App/home.html.twig' %}
+
+{% block title %}Feature{% endblock %}
+{% block content %}
+    <h1>MIS OGC API Record Service</h1>
+    <p class="my-4">
+        This document lists all the collections available in the Features service.<br/>
+    </p>
+    <div class="rows">
+        {% for collection in doc.collections %}
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block contact %}{% endblock %}

@@ -1,0 +1,83 @@
+metador_core:
+    origin: WhereGroup
+    type: system
+    name: Hauptanwendung
+    description: Metador Hauptanwendung
+    active: true
+    version: 1.0.0
+    settings:
+        administration:
+            type: multi
+            label: Administrationsoberflächen
+            options:
+                health: Selbsttest
+                source: Datenquellen
+                plugin: Plugins
+                address: Adressen
+                lists: Auswahllisten
+                keywords: Schlüsselwörter
+            default: [health, source, plugin, address, lists, keywords]
+        date_format:
+            type: string
+            label: Datumsformat
+            default: 'd.m.Y'
+        session_timeout_popup:
+            frontend: true
+            default: 60
+            placeholder: 60
+            type: string
+            label: Session Timeout Meldung
+            description: Beschreibungstext
+        system_message:
+            type: text
+            label: Systemmeldung
+            description: Zum setzten von Systemmeldung, Text eingeben und speichern. Markdown wird unterstützt.
+        proxy_host:
+            type: string
+            label: Proxy Host
+        proxy_port:
+            type: string
+            label: Proxy Port
+        proxy_user:
+            type: string
+            label: Proxy User
+        proxy_pass:
+            type: string
+            label: Proxy Password
+        proxy_ignore:
+            type: text
+            label: Proxy ignore Hosts
+            default: 'localhost, 127.0.0.1'
+        search_hits:
+            type: string
+            label: Suchergebnisse pro Seite
+            default: 10
+            description: Legt die Anzahl der Suchergebnisse pro Seite fest.
+        popup_search_hits:
+            type: string
+            label: Suchergebnisse pro Seite in Pop-Up's
+            default: 5
+            description: Legt die Anzahl der Suchergebnisse pro Seite fest.
+        background_process_limit:
+            type: choice
+            label: Limit Hintergrundprozesse
+            default: 5
+            description: Maximale Anzahl der im Hintergrund laufenden Prozesse.
+            options:
+                1: 1
+                2: 2
+                3: 3
+                4: 4
+                5: 5
+        hierarchy_levels:
+            type: multi
+            label: Unterstützte Hierarchy Level
+            options:
+                application: Anwendung
+                service: Dienst
+                series: Datensatzreihe
+                dataset: Datensatz
+                nonGeographicDataset: nichtgeografischer Datenbestand
+                software: Software
+                tile: Tile
+            default: [service, dataset]

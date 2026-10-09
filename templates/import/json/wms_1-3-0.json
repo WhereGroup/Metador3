@@ -1,0 +1,111 @@
+{
+    "_cmd": {
+        "_addNamespaces": {
+            "wms": "http://www.opengis.net/wms",
+            "gmd": "http://www.isotc211.org/2005/gmd",
+            "gco": "http://www.isotc211.org/2005/gco",
+            "srv": "http://www.isotc211.org/2005/srv",
+            "gml": "http://www.opengis.net/gml",
+            "sld": "http://www.opengis.net/sld",
+            "xsi": "http://www.w3.org/2001/XMLSchema-instance",
+            "ms": "http://mapserver.gis.umn.edu/mapserver",
+            "xlink": "http://www.w3.org/1999/xlink"
+        },
+        "_removeEmptyValues" : true,
+        "_sortResult" : true
+    },
+    "p": {
+        "_path": "/*",
+        "_data": {
+            "contact": {
+                "_asArray": true,
+                "_path": "wms:Service/wms:ContactInformation",
+                "_data": {
+                    "individualName": "wms:ContactPersonPrimary/wms:ContactPerson/text()",
+                    "organisationName": "wms:ContactPersonPrimary/wms:ContactOrganization/text()",
+                    "email": ["wms:ContactElectronicMailAddress/text()", "_asArray"],
+                    "deliveryPoint": "wms:ContactAddress/wms:Address/text()",
+                    "city": "wms:ContactAddress/wms:City/text()",
+                    "administrativeArea": "wms:ContactAddress/wms:StateOrProvince/text()",
+                    "postalCode": "wms:ContactAddress/wms:PostCode/text()",
+                    "country": "wms:ContactAddress/wms:Country/text()",
+                    "voice": "wms:ContactVoiceTelephone/text()",
+                    "facsimile": "wms:ContactFacsimileTelephone/text()"
+                }
+            },
+             "responsibleParty": {
+                "_asArray": true,
+                "_path": "wms:Service/wms:ContactInformation",
+                "_data": {
+                    "role": [null, "string", "pointOfContact"],
+                    "individualName": "wms:ContactPersonPrimary/wms:ContactPerson/text()",
+                    "organisationName": "wms:ContactPersonPrimary/wms:ContactOrganization/text()",
+                    "email": ["wms:ContactElectronicMailAddress/text()", "_asArray"],
+                    "deliveryPoint": "wms:ContactAddress/wms:Address/text()",
+                    "city": "wms:ContactAddress/wms:City/text()",
+                    "administrativeArea": "wms:ContactAddress/wms:StateOrProvince/text()",
+                    "postalCode": "wms:ContactAddress/wms:PostCode/text()",
+                    "country": "wms:ContactAddress/wms:Country/text()",
+                    "voice": "wms:ContactVoiceTelephone/text()",
+                    "facsimile": "wms:ContactFacsimileTelephone/text()"
+                }
+            },
+            "title": "wms:Service/wms:Title/text()",
+            "alternateTitle": "wms:Service/wms:Name/text()",
+            "abstract": "wms:Service/wms:Abstract/text()",
+            "keyword": {
+                "_asArray": true,
+                "_path": "wms:Service/wms:KeywordList",
+                "_function": "replaceKey",
+                "_data": {
+                    "#KEY#": [null, "string", "WMS"],
+                    "date": [null, "date", "Y-m-d"],
+                    "type": [null, "string", "creation"],
+                    "value": ["wms:Keyword/text()", "_asArray"]
+                }
+            },
+            "useLimitation": ["wms:Service/wms:AccessConstraints/text()", "_asArray"],
+            "bbox": {
+                "_asArray": false,
+                "_path": "wms:Capability/wms:Layer/wms:EX_GeographicBoundingBox",
+                "_data": {
+                    "nLatitude": "wms:northBoundLatitude/text()",
+                    "eLongitude": "wms:eastBoundLongitude/text()",
+                    "sLatitude": "wms:southBoundLatitude/text()",
+                    "wLongitude": "wms:westBoundLongitude/text()"
+                }
+            },
+            "containsOperationsName": [null, "string", "GetCapabilities"],
+            "containsOperationsDCP": [null, "string", "WebService"],
+            "containsOperationsURL": "wms:Capability/wms:Request/wms:GetCapabilities/wms:DCPType/wms:HTTP/wms:Get/wms:OnlineResource/@xlink:href",
+            "metadataLanguage": [null, "string", "ger"],
+            "metadataStandardName": [null, "string", "19119"],
+            "metadataStandardVersion": [null, "string", "2005/PDAM 1"],
+            "hierarchyLevel": [null, "string", "service"],
+            "hierarchyLevelName": [null, "string", "Darstellungsdienste"],
+            "serviceType": [null, "string", "view"],
+            "serviceTypeVersion": [null, "string", "1.3.0"],
+            "transferOptions": {
+                "_asArray": false,
+                "_path": "wms:Service",
+                "_data": {
+                    "url": "wms:OnlineResource/@xlink:href"
+                }
+            },
+            "useConstraints": {
+                "_asArray": true,
+                "_path": "wms:Service",
+                "_data": {
+                    "otherConstraints": "wms:Fees/text()"
+                }
+            },
+            "accessConstraints": {
+                "_asArray": true,
+                "_path": "wms:Service",
+                "_data": {
+                    "otherConstraints": "wms:AccessConstraints/text()"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../vendor/symfony/dependency-injection/Loader/schema/services.schema.json
+
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+# See also https://symfony.com/doc/current/service_container/import.html
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    api_access_ips: {  }
+    csw_access_ips: {  }
+    metador_temp_dir: '%kernel.project_dir%/var/temp/'
+    maintenance_file: '%kernel.project_dir%/public/maintenance.php'
+    operates_on_url: ''
+    map_shape_epsg:
+        "ETRS89_UTM_zone_32N": "EPSG:25832"
+        "ETRS_1989_UTM_Zone_32N": "EPSG:25832"
+        "GCS_WGS_1984": "EPSG:4326"
+        "Germany_Zone_2": "EPSG:31466"
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+
+    App\Service\Cache:
+        arguments:
+            $host: '%env(APP_CACHE_HOST)%'
+            $port: '%env(APP_CACHE_PORT)%'
+            $enabled: '%env(APP_CACHE_ENABLED)%'
+    App\Service\Process:
+        arguments:
+            $tempFolder: '%metador_temp_dir%'
+            $rootDir: '%kernel.project_dir%'
+    App\Service\Application:
+        arguments:
+            $env: '%env(APP_ENV)%'
+    App\Service\Plugin:
+        arguments:
+            $pluginConfigDir: '%kernel.project_dir%/config/plugins'
+    App\Twig\CoupledResourceExtension:
+        arguments:
+            $operatesOnUrl: '%env(APP_OPERATES_ON_URL)%'
+    App\Service\Import\ImportExport:
+        arguments:
+            $importFolder: '%env(APP_IMPORT_FOLDER)%'
+            $exportFolder: '%env(APP_EXPORT_FOLDER)%'
+    App\Form\ExportType:
+        arguments:
+            $exportFolder: '%env(APP_EXPORT_FOLDER)%'
+    App\Form\ImportType:
+        arguments:
+            $importFolder: '%env(APP_IMPORT_FOLDER)%'
+
+#    App\Service\Search\DatabaseSearch: '@App\Service\Search\SolrSearch'

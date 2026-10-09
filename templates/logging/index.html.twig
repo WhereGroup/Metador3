@@ -1,0 +1,137 @@
+{% extends 'admin/template.html.twig' %}
+
+{% block title %}Logging{% endblock %}
+
+{% block content %}
+    <div class="grid space">
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <a href="" class="btn info medium">
+                    <span class="icon-loop2"></span>
+                    Neuladen
+                </a>
+                {% if is_granted('ROLE_SYSTEM_SUPERUSER') %}
+                    <a href="{{ path('metador_admin_logging_confirm') }}" class="btn error medium">
+                        <span class="icon-bin2"></span>
+                        leeren
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col c-1-2 text-right">
+                <div class="-js-show-tooltip btn tooltip icon-menu right" data-tooltip-id="logging-filter" data-tooltip-position="right">
+                </div>
+                <input type="hidden" name="page" value="1" class="-js-show-logs -ls-show-logs-page" />
+                <div id="logging-filter" style="display:none;">
+                    <div class="grid padding form-wrapper small">
+                        <div class="row r-2">
+                            <div class="col c-1-2">{{ "Sortierung"|trans }}</div>
+                            <div class="col c-1-2">
+                                <div class="form-field-wrapper">
+                                    <select class="select table-select -js-show-logs" type="text" name="orderby">
+                                        <option value=""></option>
+                                        <option value="datum">{{ "Date"|trans }}</option>
+                                        <option value="id">{{ "Identifier"|trans }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row r-2">
+                            <div class="col c-1-2">{{ "Type"|trans }}</div>
+                            <div class="col c-1-2">
+                                <div class="form-field-wrapper">
+                                    <select class="select table-select -js-show-logs" type="text" name="type">
+                                        <option value=""></option>
+                                        {% for key,val in types %}
+                                            <option value="{{ val }}" >{{ val }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row r-2">
+                            <div class="col c-1-2">{{ "Kategorie"|trans }}</div>
+                            <div class="col c-1-2">
+                                <div class="form-field-wrapper">
+                                    <select class="select table-select -js-show-logs" type="text" name="category">
+                                        <option value=""></option>
+                                        {% for key,val in category %}
+                                            <option value="{{ val }}" >{{ val }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row r-2">
+                            <div class="col c-1-2">{{ "Unterkategorie"|trans }}</div>
+                            <div class="col c-1-2">
+                                <div class="form-field-wrapper">
+                                    <select class="select table-select -js-show-logs" type="text" name="subcategory">
+                                        <option value=""></option>
+                                        {% for key,val in subcategory %}
+                                            <option value="{{ val }}" >{{ val }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row r-2">
+                            <div class="col c-1-2">{{ "Operation"|trans }}</div>
+                            <div class="col c-1-2">
+                                <div class="form-field-wrapper">
+                                    <select class="select table-select -js-show-logs" type="text" name="operation">
+                                        <option value=""></option>
+                                        {% for key,val in operation %}
+                                            <option value="{{ val }}" >{{ val }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row r-2">
+                            <div class="col c-1-2">{{ "Benutzername"|trans }}</div>
+                            <div class="col c-1-2">
+                                <div class="form-field-wrapper">
+                                    <select class="select table-select -js-show-logs" type="text" name="username">
+                                        <option value=""></option>
+                                        {% for key,val in username %}
+                                            <option value="{{ val }}" >{{ val }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row r-2">
+                            <div class="col c-1-2">{{ "Datenquelle"|trans }}</div>
+                            <div class="col c-1-2">
+                                <div class="form-field-wrapper">
+                                    <select class="select table-select -js-show-logs" type="text" name="source">
+                                        <option value=""></option>
+                                        {% for key,val in source %}
+                                            <option value="{{ val }}" >{{ val }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div id="results">
+        {% include "logging/Logging/table-results.html.twig" %}
+    </div>
+{% endblock %}
+
+{#{% block css %}#}
+{#    {{ parent() }}#}
+{#    <link rel="stylesheet" href="{{ asset('bundles/metadorlogging/css/logger.css') }}">#}
+{#{% endblock %}#}
+
+{#{% block javascript %}#}
+{#{{ parent() }}#}
+{#<script src="{{ asset('bundles/metadorlogging/js/logger.js') }}"></script>#}
+{#{% endblock %}#}

@@ -1,0 +1,36 @@
+@import '../config';
+@import '../mixins';
+@import '../extensions';
+
+.md .btn {
+    @extend .input-element;
+    cursor: pointer;
+
+
+    &.no-style{
+        border: none;
+        background-color: transparent;
+        margin: 0;
+        //padding: 0;
+
+        &:hover {
+            border: none;
+        }
+    }
+}
+
+.md .spinn,
+.md span[class^="icon-spinner"] {
+    display: inline-block;
+    line-height: 1;
+    animation: anim-rotate 2s infinite linear;
+}
+
+@keyframes anim-rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

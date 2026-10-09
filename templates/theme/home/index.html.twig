@@ -1,0 +1,103 @@
+{% extends 'theme/template.html.twig' %}
+
+{% if profile is defined %}
+    {% set formPath   = 'metadata_index' %}
+    {% set formParams = { 'profile' :  profile } %}
+{% else %}
+    {% set formPath   = 'metador_home' %}
+    {% set formParams = {} %}
+{% endif %}
+
+{% block center %}
+    {% include 'theme/home/map.html.twig' %}
+
+    <div class="home -js-home">
+        <div class="source">
+            <ul class="source-list">
+                {% for slug, source in sourceConfig if slug != 'quarantine' or (slug == 'quarantine' and not is_granted('ROLE_SYSTEM_GUEST') and is_granted('ROLE_SYSTEM_USER')) %}
+                    <li class="source-list-item -js-source {% if loop.first %}active{% endif %}" data-slug="{{ slug }}">
+                        {{ source['name'] }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {% include 'theme/home/new-profile.html.twig' %}
+        </div>
+        <div class="search-content">
+            <div class="grid space responsive">
+                <div class="row r-2">
+                    <div class="col c-1-4">
+                        <div class="filter-wrapper">
+                            <div class="filter-header">{% trans %}Tools{% endtrans %}</div>
+                            <div class="filter-content">
+                                <div class="filter-content-row -js-reset-search">
+                                    <span class="icon-checkmark"></span> {% trans %}Filter zurücksetzen{% endtrans %}
+                                </div>
+
+                                <div class="filter-content-row -js-csv-download">
+                                    <form action="{{ path('metador_search') }}" target="_blank" method="post">
+                                        <input type="hidden" name="filter" value="" />
+                                        <span class="icon-download"></span> {% trans %}CSV-Download{% endtrans %}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% if hierarchyLevel is defined and hierarchyLevel is not empty %}
+                        <div class="filter-wrapper" data-filter="hierarchyLevel">
+                            <div class="filter-header">{% trans %}hierarchy_level{% endtrans %}</div>
+                            <div class="filter-content">
+                                {% for name in hierarchyLevel|sort %}
+                                    <div class="filter-content-row -js-checkbox">
+                                        <input type="hidden" name="hierarchyLevel[{{ name }}]" data-group="hierarchyLevel" data-value="true" value="true" class="-js-checkbox-input -js-search-filter" />
+                                        <span class="icon-checkbox-checked -js-checkbox-icon"></span> {{ name|capitalize }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="filter-wrapper" data-filter="sort">
+                            <div class="filter-header">{% trans %}Sortierung{% endtrans %}</div>
+                            <div class="filter-content">
+                                <div class="filter-content-row no-hower">
+                                    <div class="form-field-wrapper medium">
+                                        <select name="sort" class="select -js-search-filter">
+                                            <option value="">{% trans %}Titel{% endtrans %}</option>
+                                            <option value="date">{% trans %}Datum{% endtrans %}</option>
+                                            <option value="dateStamp">{% trans %}Zeitstempel{% endtrans %}</option>
+                                            <option value="hierarchyLevel">{% trans %}hierarchy_level{% endtrans %}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-wrapper" data-filter="date">
+                            <div class="filter-header">{% trans %}Datum{% endtrans %}</div>
+                            <div class="filter-content">
+                                <div class="filter-content-row no-hower">
+                                    <div class="form-field-wrapper medium">
+                                        <input type="text" name="date[from]" value="" data-value="" placeholder="{% trans %}Datum von{% endtrans %}" class="input -js-datepicker -js-search-filter" />
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="filter-content-row no-hower">
+                                    <div class="form-field-wrapper medium">
+                                        <input type="text" name="date[to]" value="" data-value="" placeholder="{% trans %}Datum bis{% endtrans %}" class="input -js-datepicker -js-search-filter" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col c-3-4">
+                        {% include 'theme/notify.html.twig' %}
+                        <div class="content" id="search-result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/metadorcore/js/search.js') }}"></script>
+{% endblock %}

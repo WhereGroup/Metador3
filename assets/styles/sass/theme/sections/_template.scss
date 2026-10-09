@@ -1,0 +1,247 @@
+@import '../config';
+@import '../mixins';
+@import '../extensions';
+
+.md .main {
+    margin: 0 auto;
+    max-width: $page-width;
+    min-width: 820px;
+    position: absolute;
+    z-index: 1;
+
+    @media screen and (max-width: $break-large) {
+        max-width: none;
+        display: block;
+        margin: 0 20px;
+    }
+
+    @include pos(0, 0, 0, 0);
+
+    & .center {
+        z-index: 1;
+
+        @include pos($header-height + $padding, 0, 0, 0);
+
+        &.menu {
+            .center-left {
+                display: block;
+                width: $center-left-width;
+                @include pos(0, '', 0, 0);
+
+                @media screen and (max-width: $break-menu) {
+                    display: none;
+                }
+            }
+
+            .center-right {
+                left: $center-left-width;
+
+                @media screen and (max-width: $break-menu) {
+                    left: 0;
+                }
+            }
+        }
+    }
+
+    .center-left {
+        display: none;
+    }
+
+    .center-right {
+        @include pos(0, 0, 0, 0);
+    }
+
+    & .center.grow,
+    & .center.grow > .center-right,
+    & .center.grow > .center-right > .content {
+        position: relative;
+        bottom: unset;
+        top: unset;
+    }
+    & .center.grow > .center-right > .content {
+        min-height: 400px;
+    }
+
+}
+
+.md .center > .center-right {
+    & > .content-menu {
+        height: $metadata-menu-height;
+        line-height: $metadata-menu-height;
+        position: relative;
+        z-index: 2;
+
+        & > .content-menu-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            height: $metadata-menu-height;
+            display: none;
+
+            &.act {
+                display: block;
+            }
+
+            & > .content-menu-list-item {
+                display: inline-block;
+                height: $metadata-menu-height;
+                line-height: $metadata-menu-height;
+                padding: 0 10px;
+                border: 1px solid $border;
+                border-bottom-width: 0;
+                background-color: $background;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+                position: relative;
+                z-index: 2;
+                cursor: pointer;
+                font-size: $font-medium;
+                @extend .no-user-select;
+
+                &.act.error,
+                &.error {
+                    box-shadow: inset 0 2px 0 $error;
+                }
+
+                &.act {
+                    bottom: -1px;
+                    background-color: $white;
+                    box-shadow: inset 0 2px 0 $primary;
+                }
+            }
+        }
+    }
+
+    & > .content {
+        padding: $padding $padding * 2;
+        border: 1px solid $border;
+        border-radius: $border-radius;
+        background-color: $content;
+        overflow-y: scroll;
+        z-index: 1;
+        box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.03);
+
+        @include pos(0, 0, 10px, 0);
+    }
+}
+
+.md.sys-msg {
+    & > .main {
+        @include pos($sys-msg-height, 0, 0, 0);
+    }
+
+    & > .sys-msg-text {
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: $sys-msg-height;
+        background-color: lighten($error, 40%);
+        border-bottom: 4px solid $error;
+        overflow: hidden;
+        overflow-y: scroll;
+
+        @include transition-all(150ms);
+
+        &.large {
+            height: $sys-msg-large-height;
+            overflow-y: scroll;
+        }
+
+        & > .sys-msg-text-content {
+            margin: 0 auto;
+            width: $page-width;
+
+            @media screen and (max-width: $break-large) {
+                padding: 0 $padding;
+            }
+
+            @include pos(0,0,0,0);
+        }
+    }
+}
+
+.md {
+    .progressbar {
+        height: 3px;
+        width: 100%;
+        background-color: #EEE;
+        clear: both;
+        //margin: 10px 0 ;
+    }
+
+    .progress.act {
+        background: $primary;
+        height: 3px;
+        width: 0%;
+        max-width: 100%;
+        float: left;
+        -webkit-animation: progress 2s 1 forwards;
+        -moz-animation: progress 2s 1 forwards;
+        -ms-animation: progress 2s 1 forwards;
+        animation: progress 2s 1 forwards;
+    }
+
+    @-webkit-keyframes progress {
+        from { } to { width: 100% }
+    }
+
+    @-moz-keyframes progress {
+        from { } to { width: 100% }
+    }
+
+    @-ms-keyframes progress {
+        from { } to { width: 100% }
+    }
+
+    @keyframes progress {
+        from { } to { width: 100% }
+    }
+}
+
+.md .footer {
+    text-align: center;
+    margin-top: $padding/2;
+    margin-bottom: $padding;
+}
+
+.md .footer-link {
+    padding: 0 $padding/2;
+    color: lighten($font, 15%);
+}
+
+.pop-up {
+    @include pos(0, 0, 0, 0);
+    display: none;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.2);
+    &.active {
+        display: block;
+    }
+}
+
+.pop-up-window {
+    margin: 5rem auto;
+    width: 40rem;
+    height: 80%;
+    background-color: $white;
+    position: relative;
+    border: 1px solid $border;
+    border-radius: $border-radius;
+}
+
+.pop-up-window-body {
+    @include pos(0, 0, $normal-item-height + $padding, 0);
+    overflow-y: scroll;
+    padding: $padding;
+}
+
+.pop-up-window-footer {
+    @include pos('', 0, 0, 0);
+    height: $normal-item-height + $padding;
+    text-align: right;
+    padding: $padding/2;
+    border-top: 1px solid $border;
+    background-color: $background;
+}

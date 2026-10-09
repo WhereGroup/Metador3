@@ -1,0 +1,128 @@
+{% extends 'theme/base.html.twig' %}
+
+{% block title %}Metador{% endblock %}
+
+{% block body %}
+    {% set systemMessage = get_setting('system_message', 'plugin', 'metador_core') %}
+    <div class="md {% if systemMessage %}sys-msg{% endif %}">
+        <div class="progressbar"><div class="progress -js-progress"></div></div>
+        {% if systemMessage %}
+            <div class="sys-msg-text -js-sys-msg">
+                <div class="sys-msg-text-content">{{ systemMessage|markdown }}</div>
+                <div class="progressbar"><div class="progress -js-progress"></div></div>
+            </div>
+        {% endif %}
+        <div class="main">
+            <div class="top">
+                <div class="top-left">
+                    <a href="{{ path('metador_home') }}" class="logo">
+                        <img alt="Logo" src="{{ asset('build/images/logo-s.png') }}" />
+                    </a>
+                </div>
+                <div class="top-right">
+                    {% include 'home/search-field.html.twig' %}
+
+                    {% block global_menu %}
+                        {% include 'theme/globalMenu.html.twig' %}
+                    {% endblock %}
+                </div>
+            </div>
+            {% block center %}{% endblock %}
+            {% if isHome is defined %}
+            <div class="footer">
+                <a href="{{ path('metador_page_show', { slug: 'impressum' }) }}" class="footer-link">Impressum</a> |
+                <a href="{{ path('metador_page_show', { slug: 'datenschutz' }) }}" class="footer-link">Datenschutzerklärung</a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="timeout-wrapper -js-timeout-wrapper">
+            <div class="timeout-dialog -js-timeout-dialog" data-logout-path="{{ url('logout') }}" data-heartbeat-path="{{ url('app_heartbeat') }}" >
+                <div class="timeout-dialog-header"><span class="icon-bell"></span> {% trans %}session_timeout_title{% endtrans %}</div>
+                <div class="timeout-dialog-content text-center">{% trans %}session_timeout_dialog{% endtrans %}</div>
+                <div class="timeout-dialog-footer">
+                    <div class="grid">
+                        <div class="row r-2">
+                            <div class="col c-1-2">
+                                <button class="btn success medium -js-timeout-dialog-heartbeat">
+                                    <span class="icon-checkmark"></span>
+                                    {% trans %}session_timeout_stay{% endtrans %}
+                                </button>
+                            </div>
+                            <div class="col c-1-2 text-right">
+                                <a href="{{ path('logout') }}" class="-js-timeout-dialog-logout btn medium">
+                                    <span class="icon-sign-out"></span>
+                                    {% trans %}session_timeout_logout{% endtrans %}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-background"></div>
+        </div>
+    </div>
+    {% if isHome is defined %}
+    <div class="md pop-up">
+        <div class="pop-up-window">
+            <div class="pop-up-window-body">
+                {% set popupContent = get_setting('popup', 'pages') %}
+
+                {% if popupContent is not null %}
+                    {% set page = popupContent|json_decode %}
+                    {{ page.markdown|markdown }}
+                {% elseif popupContent is null and is_granted('ROLE_SYSTEM_GEO_OFFICE') %}
+                    <div class="notify warning text-center">
+                        Klicken Sie <a href="{{ path('metador_admin_page_new', { slug:  'popup'}) }}" onclick="closePopup()" class="btn medium">
+                            <span class="icon-externalMarkdownExtension.php-link-square"></span>
+                            hier
+                        </a> um eine neue Seite anzulegen.
+                    </div>
+                {% else %}
+                    <div class="notify info text-center">Dieser Inhalt ist derzeit nicht verfügbar.</div>
+                {% endif %}
+            </div>
+            <div class="pop-up-window-footer">
+                <button class="btn no-style" onclick="dontShowAgain()">nicht erneut anzeigen</button>
+                <button class="btn info" onclick="closePopup()">schließen</button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{# {% block css %} #}
+{# {% endblock %} #}
+
+
+{% block javascript %}
+{# Parent-Block einbinden, sonst wird encore_entry_script_tags('app')
+   aus base.html.twig verschluckt und jQuery/App-Code nie geladen. #}
+{{ parent() }}
+
+{% if isHome is defined %}
+<script>
+    const sessionValue = window.sessionStorage.getItem('metador-popup');
+    const localValue   = window.localStorage.getItem('metador-popup');
+    const showPopup = {% if showPopup is defined %}true{% else %}false{% endif %};
+
+    if (sessionValue !== 'false' && localValue !== 'false' && showPopup) {
+        if (document.querySelector('.pop-up')) {
+            document.querySelector('.pop-up').classList.add('active');
+        } else {
+            window.document.addEventListener("DOMContentLoaded", () => {
+                document.querySelector('.pop-up').classList.add('active');
+            }, true);
+        }
+    }
+    function closePopup() {
+        window.sessionStorage.setItem('metador-popup', 'false');
+        document.querySelector('.pop-up').classList.remove('active');
+    }
+
+    function dontShowAgain() {
+        window.localStorage.setItem('metador-popup', 'false');
+        closePopup();
+    }
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'admin/template.html.twig' %}
+
+{% block title %}Hintergrundkarte{% endblock %}
+
+{% block content %}
+    <div class="grid content-title">
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <h1 class="title dm">{% trans %}Hintergrundkarten{% endtrans %}</h1>
+            </div>
+            <div class="col c-1-2 text-right">
+                <a href="{{ path('metador_admin_map_new') }}" class="btn info medium">
+                    <span class="icon-plus"></span> {% trans %}Neu{% endtrans %}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="line-separator" />
+
+    <table class="table bordered">
+        <thead>
+            <tr>
+                <th>{% trans %}Title{% endtrans %}</th>
+                <th>{% trans %}Sichtbarkeit{% endtrans %}</th>
+                <th>{% trans %}Reihenfolge{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in rows  %}
+            <tr>
+                <td>
+                    <a href="{{ path('metador_admin_map_edit', {'id': row.id }) }}">{{ row.title }}</a>
+                </td>
+                <td>{{ row.visible }}</td>
+                <td>{{ row.priority }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

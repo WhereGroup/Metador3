@@ -1,0 +1,17 @@
+metador_dataset_profile:
+    active: true
+    origin: WhereGroup
+    name: Datensatz
+    description: Metadatenprofil für Geodatensätze
+    template_path: datasetProfile
+    version: '1.0'
+    type: profile
+    require:
+        - metador_basic_profile
+    settings:
+        source:
+            type: multi
+            label: Verfügbar in Datenquelle
+            description: Einstellen in welcher Datenquelle der Datensatz erstellt werden kann.
+            optionSource: source
+            default: [default]

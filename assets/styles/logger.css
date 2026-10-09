@@ -1,0 +1,117 @@
+.light-normal {
+  color: #444;
+  background-color: #f7f7f7;
+  border: 1px solid #e1e1e1; }
+
+.light-normal:hover {
+  background-color: #f4f4f4;
+  border: 1px solid #dedede; }
+
+.light-info, .md .table tbody > tr > td.log-message-type.info {
+  color: #444;
+  background-color: #e5f3ff;
+  border: 1px solid #b2dbff; }
+
+.light-info:hover, .md .table tbody > tr > td.log-message-type.info:hover {
+  background-color: #e0f1ff;
+  border: 1px solid #add9ff; }
+
+.light-warning, .md .table tbody > tr > td.log-message-type.warning {
+  background-color: #fdf4df;
+  border: 1px solid #fae4af; }
+
+.light-warning:hover, .md .table tbody > tr > td.log-message-type.warning:hover {
+  background-color: #fdf3da;
+  border: 1px solid #fae3aa; }
+
+.light-success, .md .table tbody > tr > td.log-message-type.success {
+  color: #444;
+  background-color: #d9f0d3;
+  border: 1px solid #b8e4ad; }
+
+.light-success:hover, .md .table tbody > tr > td.log-message-type.success:hover {
+  background-color: #d6efcf;
+  border: 1px solid #b5e2a9; }
+
+.light-error, .md .table tbody > tr > td.log-message-type.error {
+  color: #444;
+  background-color: #f6cacc;
+  border: 1px solid #ef9ea3; }
+
+.light-error:hover, .md .table tbody > tr > td.log-message-type.error:hover {
+  background-color: #f6c5c8;
+  border: 1px solid #ef999f; }
+
+.dark-info > a, .dark-success > a, .dark-warning > a, .dark-error > a {
+  color: #fff; }
+
+.dark-normal {
+  color: #444;
+  background-color: #f7f7f7;
+  border: 1px solid #e1e1e1; }
+
+.dark-normal:hover {
+  background-color: #eaeaea;
+  border: 1px solid #d4d4d4; }
+
+.dark-info {
+  color: #fff;
+  background-color: #4dacfe;
+  border: 1px solid #1a94fe; }
+
+.dark-info:hover {
+  background-color: #1a94fe;
+  border: 1px solid #0188fd; }
+
+.dark-success {
+  color: #fff;
+  background-color: #77ca60;
+  border: 1px solid #59b93e; }
+
+.dark-success:hover {
+  background-color: #59b93e;
+  border: 1px solid #4fa637; }
+
+.dark-warning {
+  color: #fff;
+  background-color: #f5c44e;
+  border: 1px solid #f2b41e; }
+
+.dark-warning:hover {
+  background-color: #f2b41e;
+  border: 1px solid #e9a90d; }
+
+.dark-error {
+  color: #fff;
+  background-color: #d2222d;
+  border: 1px solid #a61b24; }
+
+.dark-error:hover {
+  background-color: #a61b24;
+  border: 1px solid #90171f; }
+
+.md .no-user-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.md .text-center {
+  text-align: center; }
+
+.md .table .log-message-row {
+  border-bottom: 2px solid #008ec0;
+  padding: 20px;
+  line-height: 20px; }
+
+.md .table .log-categories {
+  font-weight: bold; }
+
+.md .table .log-categories-icon {
+  vertical-align: middle;
+  color: #aaa; }
+
+.md .table tbody > tr > td.log-message-type {
+  width: 35px;
+  padding: 0;
+  text-align: center; }

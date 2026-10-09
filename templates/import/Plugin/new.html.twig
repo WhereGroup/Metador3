@@ -1,0 +1,147 @@
+{% extends 'admin/template.html.twig' %}
+
+{% if form.vars.value.id is defined and form.vars.value.id is not empty %}
+    {% set title  = operation == 'import' ? 'Import bearbeiten'|trans : 'Export bearbeiten'|trans %}
+    {% set path   = 'metador_admin_import_edit' %}
+    {% set params = {'id': form.vars.value.id, 'operation': operation } %}
+{% else %}
+    {% set title  = operation == 'import' ? 'Import erstellen'|trans : 'Export erstellen'|trans %}
+    {% set path   = 'metador_admin_import_new' %}
+    {% set params = { 'operation': operation } %}
+{% endif %}
+
+{% block content %}
+    <div class="grid content-title">
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <h1 class="title dm">{{ title }}</h1>
+            </div>
+            <div class="col c-1-2 text-right">
+                <a href="{{ path('metador_admin_import') }}" class="btn medium">
+                    <span class="icon-sign-out"></span> {% trans %}Übersicht{% endtrans %}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="line-separator" />
+
+    {{ form_start(form, { 'action': path(path, params), 'method': 'POST', 'attr': {
+        novalidate: 'novalidate', autocomplete: 'off'
+    }}) }}
+
+    {% if not form.vars.valid %}
+        <div class="notify error">
+            {{ form_errors(form) }}
+            {{ form_errors(form.title) }}
+            {{ form_errors(form.source) }}
+            {{ form_errors(form.username) }}
+            {% if operation == 'import' %}
+                {{ form_errors(form.importFolder) }}
+            {% elseif operation == 'export' %}
+                {{ form_errors(form.exportFolder) }}
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <div class="grid space row-space responsive">
+        <div class="row r-6">
+            <div class="col c-3-4">
+                <div>{{ form_label(form.title, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">{{ form_widget(form.title, { 'attr': {'class': 'input'}}) }}</div>
+            </div>
+            <div class="col c-1-4">
+                <div>{{ form_label(form.token, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">{{ form_widget(form.token, { 'attr': {'class': 'input'}}) }}</div>
+            </div>
+        </div>
+
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <div>{{ form_label(form.source, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">{{ form_widget(form.source, { 'attr': {'class': 'select'}}) }}</div>
+            </div>
+            <div class="col c-1-2">
+                <div>{{ form_label(form.username, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                <div class="form-field-wrapper">{{ form_widget(form.username, { 'attr': {'class': 'select'}}) }}</div>
+            </div>
+        </div>
+
+        <div class="row r-2">
+            <div class="col c-1-2 notify warning">
+                {{ form_widget(form.removeSourceData, { 'attr': {'class': 'checkbox'}}) }}
+                {{ form_label(form.removeSourceData, null, { 'label_attr': {'class': 'form-label'}}) }}
+                {% if operation == 'import' %}
+                    <div>Bei erfolgreichen Import werden Metadaten im Ordner gelöscht.</div>
+                {% elseif operation == 'export' %}
+                    <div>Bei erfolgreichen Export werden Metadaten in der Datenbank gelöscht.</div>
+                {% endif %}
+            </div>
+            <div class="col c-1-2 notify warning">
+                {{ form_widget(form.removeDataOnDestination, { 'attr': {'class': 'checkbox'}}) }}
+                {{ form_label(form.removeDataOnDestination, null, { 'label_attr': {'class': 'form-label'}}) }}
+                {% if operation == 'import' %}
+                    <div>Bei erfolgreichen Import werden bereits vorhandene Metadaten überschrieben.</div>
+                {% elseif operation == 'export' %}
+                    <div>Bei erfolgreichen Export werden bereits vorhandene Metadaten im Ordner überschrieben.</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row r-2">
+            <div class="col c-1-2">
+                {% if operation == 'import' %}
+                    <div>{{ form_label(form.importFolder, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                    <div class="form-field-wrapper">{{ form_widget(form.importFolder, { 'attr': {'class': 'select'}}) }}</div>
+                {% elseif operation == 'export' %}
+                    <div>{{ form_label(form.exportFolder, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                    <div class="form-field-wrapper">{{ form_widget(form.exportFolder, { 'attr': {'class': 'select'}}) }}</div>
+                {% endif %}
+            </div>
+            <div class="col c-1-2"></div>
+        </div>
+
+        {% if operation == 'import' %}
+            {% for hierarchy_level in get_setting('hierarchy_levels', 'plugin', 'metador_core') %}
+                {% if loop.first or loop.index % 3 == 0 %}
+                    <div class="row r-2">
+                {% endif %}
+                <div class="col c-1-2">
+                    <div>{{ form_label(form[hierarchy_level], null, { 'label_attr': {'class': 'form-label'}}) }} {% trans %}Mapping beim Import{% endtrans %}</div>
+                    <div class="form-field-wrapper">
+                        {{ form_widget(form[hierarchy_level], { 'attr': {'class': 'input'}}) }}
+                    </div>
+                </div>
+                {% if loop.last or loop.index % 2 == 0 %}
+                    </div>
+                {% endif %}
+            {%  endfor %}
+        {% elseif operation == 'export' %}
+            <div class="row r-1">
+                <div class="col c-1">
+                    <div>{{ form_label(form.filter, null, { 'label_attr': {'class': 'form-label'}}) }}</div>
+                    <div class="form-field-wrapper">
+                        {{ form_widget(form.filter, { 'attr': {'class': 'textarea'}}) }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <hr class="line-separator"/>
+
+        <div class="row r-1">
+            <div class="col c-1 text-right">
+                <button class="btn success medium">
+                    <span class="icon-checkmark"></span> {% trans %}speichern{% endtrans %}
+                </button>
+                {% if form.vars.value.id is defined and form.vars.value.id is not empty %}
+                    <a href="{{ path('metador_admin_import_confirm', params) }}" class="btn error medium">
+                        <span class="icon-bin2"></span> {% trans %}löschen{% endtrans %}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}
+

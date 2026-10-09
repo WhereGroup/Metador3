@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema name="Metadaten" version="1.6">
+    <!-- FIELDS -->
+    <field indexed="true" multiValued="false" required="true" stored="true" type="string" name="id" />
+    <field indexed="true" multiValued="true"  required="true" stored="true" type="string" name="address_id" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="abstract" />
+    <field indexed="true" multiValued="false" required="true" stored="true" type="string" name="insertUsername" />
+    <field indexed="true" multiValued="false" required="true" stored="true" type="string" name="insertTime" />
+    <field indexed="true" multiValued="true"  required="false" stored="true" type="array"  name="role" />
+    <field indexed="true" multiValued="true"  required="false" stored="true" type="array"  name="keywords" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="date" />
+    <field indexed="true" multiValued="false" required="true" stored="true" type="string" name="dateStamp" />
+    <field indexed="true" multiValued="false" required="true" stored="true" type="string" name="hierarchyLevel" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="array"  name="topicCategory" />
+    <field indexed="true" multiValued="true" required="false" stored="true" type="split"  name="productGroup" />
+    <field indexed="true" multiValued="false" required="true" stored="true" type="string" name="object" />
+    <field indexed="true" multiValued="false" required="true" stored="true" type="string" name="parent" />
+    <field indexed="true" multiValued="false" required="true" stored="true" type="string" name="profile" />
+    <field indexed="true" multiValued="false" required="true" stored="true" type="string" name="public" />
+    <field indexed="true" multiValued="false" required="true" stored="true" type="string" name="source" />
+    <field indexed="true" multiValued="false" required="true" stored="true" type="string" name="title" />
+    <field indexed="true" multiValued="false" required="true" stored="true" type="istring" name="titleFilter" />
+    <field indexed="true" multiValued="false" required="true" stored="true" type="string" name="uuid" />
+    <field indexed="true" multiValued="true"  required="true" stored="true" type="text"   name="searchfield" />
+    <field indexed="true" multiValued="true"  required="true" stored="true" type="text"   name="anyText" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="pdouble" name="bboxn" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="pdouble" name="bboxe" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="pdouble" name="bboxs" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="pdouble" name="bboxw" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="location_rpt" name="geom"  />
+
+    <field name="_version_" type="plong" indexed="true" stored="true"/>
+
+    <copyField source="title" dest="titleFilter" />
+
+    <uniqueKey>uuid</uniqueKey>
+
+    <!-- FIELD TYPES -->
+    <fieldType class="solr.TextField" multiValued="true" name="sprachen" positionIncrementGap="100">
+        <analyzer type="index">
+            <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        </analyzer>
+    </fieldType>
+
+    <fieldType class="solr.StrField" name="string" sortMissingLast="true"/>
+    <fieldType class="solr.TrieIntField" name="int" positionIncrementGap="0" precisionStep="0"/>
+    <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+    <fieldType name="pdates" class="solr.DatePointField" docValues="true" multiValued="true"/>
+    <fieldType name="pint" class="solr.IntPointField" docValues="true"/>
+    <fieldType name="pfloat" class="solr.FloatPointField" docValues="true"/>
+    <fieldType name="plong" class="solr.LongPointField" docValues="true"/>
+    <fieldType name="pdouble" class="solr.DoublePointField" docValues="true"/>
+    <fieldType name="pints" class="solr.IntPointField" docValues="true" multiValued="true"/>
+    <fieldType name="pfloats" class="solr.FloatPointField" docValues="true" multiValued="true"/>
+    <fieldType name="plongs" class="solr.LongPointField" docValues="true" multiValued="true"/>
+    <fieldType name="pdoubles" class="solr.DoublePointField" docValues="true" multiValued="true"/>
+    <fieldType name="location_rpt"   class="solr.SpatialRecursivePrefixTreeFieldType"
+               spatialContextFactory="JTS"
+               autoIndex="true"
+               validationRule="repairBuffer0"
+               distErrPct="0.025"
+               maxDistErr="0.001"
+               distanceUnits="kilometers" />
+
+    <fieldType class="solr.TextField" multiValued="true" name="array" positionIncrementGap="100">
+        <analyzer>
+            <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        </analyzer>
+    </fieldType>
+    <fieldType class="solr.TextField" multiValued="true" name="split" positionIncrementGap="100">
+        <analyzer>
+            <tokenizer class="solr.PatternTokenizerFactory" pattern="[;]+" />
+        </analyzer>
+    </fieldType>
+    <fieldType class="solr.TextField" multiValued="true" name="text" positionIncrementGap="100">
+        <analyzer type="index">
+            <tokenizer class="solr.StandardTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+            <!-- <filter class="solr.StopFilterFactory" words="stopwords.txt"/> -->
+        </analyzer>
+        <analyzer type="query">
+            <tokenizer class="solr.StandardTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+            <!-- <filter class="solr.StopFilterFactory" words="stopwords.txt"/> -->
+            <!-- <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true"  expand="false"/> -->
+        </analyzer>
+    </fieldType>
+    <fieldType class="solr.TextField" multiValued="false" name="istring" positionIncrementGap="100">
+        <analyzer type="index">
+            <tokenizer class="solr.KeywordTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+        </analyzer>
+        <analyzer type="query">
+            <tokenizer class="solr.KeywordTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+        </analyzer>
+    </fieldType>
+</schema>

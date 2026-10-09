@@ -1,0 +1,21 @@
+{% extends 'manual/template.html.twig' %}
+
+{% macro drawIndex(index) %}
+    <ul style="list-style: decimal;">
+        {% for name, value in index %}
+            {% if value['class'] is defined  %}
+                <li>
+                    <a href="{{ path('manual_page', { manual: value['manual'], plugin: value['class'], page: value['template']}) }}">{{ name }}</a>
+                </li>
+            {% elseif value is iterable and value['class'] is not defined  %}
+                <li><strong>{{ name }}</strong></li>
+                {{ _self.drawIndex(value) }}
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% block content %}
+    <h1 class="title">{{ manual }}</h1>
+    <div class="manual-index">{{ _self.drawIndex(index) }}</div>
+{% endblock %}

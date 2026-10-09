@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>{% block title %}Home{% endblock %}</title>
+</head>
+<body>
+<header id="header">
+    <a href="http://localhost:8080/geoserver/ogc/features/v1/"></a>
+    <div id="fetch"><span style="margin: 0.5em">Fetch this resource as:</span>
+        <select class="form-select form-select-sm form-select-open-basic">
+            <option value="none" selected>-- Please choose a format --</option>
+            {% for link in doc.links %}
+                <option value="{{ link.href }}">{{ link.type }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</header>
+<div id="breadcrumb" class="py-2 mb-4">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                {% for title, href in nav %}
+                    {% if href is not empty %}
+                        <li class='breadcrumb-item'><a href="{{ href }}">{{ title }}</a></li>
+                    {% else %}
+                        <li class='breadcrumb-item active'>{{ title }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ol>
+        </nav>
+    </div>
+</div>
+<main>
+    <div id="content" class="container">
+        {% block content %}
+            <h1>MIS OGC API Record Service</h1>
+            <p class="my-4">
+                This is the landing page of the Features 1.0 service, providing links to the service API and its
+                contents.<br/>
+            </p>
+            <div class="rows">
+
+            </div>
+            {#        <script src="http://localhost:8080/geoserver/webresources/ogcapi/features.js"></script> #}
+            {#        <input type="hidden" id="maxNumberOfFeaturesForPreview" value="50"/> #}
+        {% endblock %}
+    </div>
+    {% block contact %}
+        <h2>Contact information</h2>
+        <ul>
+            <li>Server managed by Claudius Ptolomaeus</li>
+            <li>Organization: OSGeo</li>
+            <li>Mail: <a href="mailto:claudius.ptolomaeus@mercury.olympus.gov">claudius.ptolomaeus@mercury.olympus.gov</a>
+            </li>
+        </ul>
+    {% endblock %}
+</main>
+</body>
+</html>

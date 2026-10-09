@@ -1,0 +1,50 @@
+{% extends 'admin/template.html.twig' %}
+
+{% block title %}{{ 'Benutzer'|trans }}{% endblock %}
+
+{% block content %}
+<div class="grid content-title">
+    <div class="row r-2">
+        <div class="col c-1-2">
+            <h1 class="title dm">{% trans %}Benutzer{% endtrans %}</h1>
+        </div>
+        <div class="col c-1-2 text-right">
+            <a href="{{ path('metador_admin_user_new') }}" class="btn info medium">
+                <span class="icon-plus"></span> {% trans %}Neu{% endtrans %}
+            </a>
+        </div>
+    </div>
+</div>
+
+<hr class="line-separator" />
+
+<table class="table bordered">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Groups</th>
+        <th>Active</th>
+        <th class="icon-column">Id</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr>
+            <td>
+                <a href="{{ path('metador_admin_user_edit', {'id': user.id}) }}">
+                    {{ user.username|teaser(13, 1) }}
+                </a>
+            </td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.groups|length }}</td>
+            <td>{{ user.isactive }}</td>
+            <td class="text-right">
+                #{{ user.id }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br/>
+{% endblock %}

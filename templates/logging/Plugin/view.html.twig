@@ -1,0 +1,18 @@
+{% extends 'plugin/template.html.twig' %}
+
+{% block content %}
+    <div class="plugin-view">
+        {{ pluginView.info('Logbuch', '...') }}
+    </div>
+
+    {% if pluginConfiguration is defined and pluginConfiguration is not empty %}
+        <form action="" method="post">
+        {% for key, value in pluginConfiguration %}
+            <label for="{{ pluginKey }}-conf-{{ key }}">{{ key }}</label>
+            <input type="text" id="{{ pluginKey }}-conf-{{ key }}" name="{{ pluginKey }}[{{ key }}]" value="{{ value }}">
+            <br>
+        {% endfor %}
+        <button type="submit">{% trans %}Speichern{% endtrans %}</button>
+        </form>
+    {% endif %}
+{% endblock %}

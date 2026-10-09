@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema name="Metadaten" version="1.6">
+    <!-- FIELDS -->
+    <field indexed="true" multiValued="false" required="true" stored="true" type="string" name="id" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="uuid" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="individualName" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="organisationName" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="department" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="positionName" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="email" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="country" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="administrativeArea" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="deliveryPoint" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="city" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="postalCode" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="voice" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="facsimile" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="url" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="urlDescription" />
+    <field indexed="true" multiValued="false" required="false" stored="true" type="string" name="hoursOfService" />
+    <field indexed="true" multiValued="true"  required="true" stored="true" type="text"   name="searchfield" />
+    <field name="_version_" type="plong" indexed="true" stored="true"/>
+
+    <uniqueKey>id</uniqueKey>
+
+    <!-- FIELD TYPES -->
+    <fieldType class="solr.TextField" multiValued="true" name="sprachen" positionIncrementGap="100">
+        <analyzer type="index">
+            <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        </analyzer>
+    </fieldType>
+    <fieldType class="solr.StrField" name="string" sortMissingLast="true"/>
+    <fieldType name="plong" class="solr.LongPointField" docValues="true"/>
+    <fieldType class="solr.TextField" multiValued="true" name="text" positionIncrementGap="100">
+        <analyzer type="index">
+            <tokenizer class="solr.StandardTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+        </analyzer>
+        <analyzer type="query">
+            <tokenizer class="solr.StandardTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+        </analyzer>
+    </fieldType>
+</schema>

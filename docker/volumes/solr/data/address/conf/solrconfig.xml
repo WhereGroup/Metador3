@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <luceneMatchVersion>9.11.1</luceneMatchVersion>
+    <dataDir>${solr.data.dir:}</dataDir>
+
+    <schemaFactory class="ClassicIndexSchemaFactory" />
+
+<!--    <queryParser name="join" class="org.apache.solr.search.JoinQParserPlugin">-->
+<!--        <str name="routerField">id</str>-->
+<!--        <arr name="allowSolrUrls">-->
+<!--            <str>http://localhost:8983/solr</str>-->
+<!--        </arr>-->
+<!--    </queryParser>-->
+
+    <requestHandler name="/select" class="solr.SearchHandler">
+        <!--
+            defaults    : Defaults Einstellung die überschrieben werden kann.
+            invariants  : Defaults Einstellung die NICHT überschrieben werden kann.
+            appends     : Wird nicht überschrieben sondern angehängt.
+        -->
+        <lst name="defaults">
+            <str name="echoParams">explicit</str>
+            <int name="rows">100</int>
+            <str name="df">searchfield</str>
+            <str name="wt">json</str>
+            <str name="sort">id asc</str>
+            <str name="q.op">AND</str>
+        </lst>
+<!--        <lst name="invariants">-->
+<!--            <str name="facet">on</str>-->
+<!--            <str name="facet.field">topicCategory</str>-->
+<!--            <str name="facet.field">productGroup</str>-->
+<!--            <str name="facet.mincount">1</str>-->
+<!--            &lt;!&ndash;<str name="facet.field">manu_exact</str>&ndash;&gt;-->
+<!--            &lt;!&ndash;<str name="facet.query">price:[* TO 500]</str>&ndash;&gt;-->
+<!--            &lt;!&ndash;<str name="facet.query">price:[500 TO *]</str>&ndash;&gt;-->
+<!--        </lst>-->
+    </requestHandler>
+
+    <!-- Der UpdateRequestHandler wird dazu benutzt, Dokumente an Solr zu senden -->
+    <requestHandler name="/update" class="solr.UpdateRequestHandler"  />
+
+    <!-- ANALYSIS -->
+    <requestHandler name="/analysis/field" startup="lazy" class="solr.FieldAnalysisRequestHandler" />
+    <requestHandler name="/analysis/document" class="solr.DocumentAnalysisRequestHandler" startup="lazy" />
+
+    <!-- REPLICATION -->
+    <requestHandler name="/replication" class="solr.ReplicationHandler" >
+        <lst name="master">
+            <str name="replicateAfter">commit</str>
+            <str name="replicateAfter">startup</str>
+            <str name="confFiles">schema.xml</str>
+        </lst>
+    </requestHandler>
+
+    <requestHandler name="/query" class="solr.SearchHandler">
+        <lst name="defaults">
+            <str name="echoParams">explicit</str>
+            <str name="wt">json</str>
+            <str name="indent">true</str>
+        </lst>
+    </requestHandler>
+
+    <lib dir="${solr.install.dir:../../../..}/contrib/extraction/lib" regex=".*\.jar" />
+    <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-cell-\d.*\.jar" />
+
+    <lib dir="${solr.install.dir:../../../..}/contrib/clustering/lib/" regex=".*\.jar" />
+    <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-clustering-\d.*\.jar" />
+
+    <lib dir="${solr.install.dir:../../../..}/contrib/langid/lib/" regex=".*\.jar" />
+    <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-langid-\d.*\.jar" />
+
+    <lib dir="${solr.install.dir:../../../..}/contrib/velocity/lib" regex=".*\.jar" />
+    <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-velocity-\d.*\.jar" />
+</config>

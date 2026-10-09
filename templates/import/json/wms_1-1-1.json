@@ -1,0 +1,103 @@
+{
+    "_cmd": {
+        "_addNamespaces": {
+            "xlink": "http://www.w3.org/1999/xlink"
+        },
+        "_removeEmptyValues" : true,
+        "_sortResult" : true
+    },
+    "p": {
+        "_path": "/*",
+        "_data": {
+            "contact": {
+                "_asArray": true,
+                "_path": "Service/ContactInformation",
+                "_data": {
+                    "individualName": "ContactPersonPrimary/ContactPerson/text()",
+                    "organisationName": "ContactPersonPrimary/ContactOrganization/text()",
+                    "email": ["ContactElectronicMailAddress/text()", "_asArray"],
+                    "deliveryPoint": "ContactAddress/Address/text()",
+                    "city": "ContactAddress/City/text()",
+                    "administrativeArea": "ContactAddress/StateOrProvince/text()",
+                    "postalCode": "ContactAddress/PostCode/text()",
+                    "country": "ContactAddress/Country/text()",
+                    "voice": "ContactVoiceTelephone/text()",
+                    "facsimile": "ContactFacsimileTelephone/text()"
+                }
+            },
+            "responsibleParty": {
+                "_asArray": true,
+                "_path": "Service/ContactInformation",
+                "_data": {
+                    "role": [null, "string", "pointOfContact"],
+                    "individualName": "ContactPersonPrimary/ContactPerson/text()",
+                    "organisationName": "ContactPersonPrimary/ContactOrganization/text()",
+                    "email": ["ContactElectronicMailAddress/text()", "_asArray"],
+                    "deliveryPoint": "ContactAddress/Address/text()",
+                    "city": "ContactAddress/City/text()",
+                    "administrativeArea": "ContactAddress/StateOrProvince/text()",
+                    "postalCode": "ContactAddress/PostCode/text()",
+                    "country": "ContactAddress/Country/text()",
+                    "voice": "ContactVoiceTelephone/text()",
+                    "facsimile": "ContactFacsimileTelephone/text()"
+                }
+            },
+            "title": "Service/Title/text()",
+            "alternateTitle": "Service/Name/text()",
+            "abstract": "Service/Abstract/text()",
+            "keyword": {
+                "_asArray": true,
+                "_path": "Service/KeywordList",
+                "_function": "replaceKey",
+                "_data": {
+                    "#KEY#": [null, "string", "WMS"],
+                    "date": [null, "date", "Y-m-d"],
+                    "type": [null, "string", "creation"],
+                    "value": ["Keyword/text()", "_asArray"]
+                }
+            },
+            "useLimitation": ["Service/AccessConstraints/text()", "_asArray"],
+            "bbox": {
+                "_asArray": true,
+                "_path": "Capability/Layer",
+                "_data": {
+                    "nLatitude": "LatLonBoundingBox/@maxy",
+                    "eLongitude": "LatLonBoundingBox/@maxx",
+                    "sLatitude": "LatLonBoundingBox/@miny",
+                    "wLongitude": "LatLonBoundingBox/@minx"
+                }
+            },
+            "containsOperationsName": [null, "string", "GetCapabilities"],
+            "containsOperationsDCP": [null, "string", "WebService"],
+            "containsOperationsURL":  "Capability/Request/GetCapabilities/DCPType/HTTP/Get/OnlineResource/@xlink:href",
+            "metadataLanguage": [null, "string", "ger"],
+            "metadataStandardName": [null, "string", "19119"],
+            "metadataStandardVersion": [null, "string", "2005/PDAM 1"],
+            "hierarchyLevel": [null, "string", "service"],
+            "hierarchyLevelName": [null, "string", "Darstellungsdienste"],
+            "serviceType": [null, "string", "view"],
+            "serviceTypeVersion": [null, "string", "1.1.1"],
+            "transferOptions": {
+                "_asArray": false,
+                "_path": "Service",
+                "_data": {
+                    "url": "OnlineResource/@xlink:href"
+                }
+            },
+            "useConstraints": {
+                "_asArray": true,
+                "_path": "Service",
+                "_data": {
+                    "otherConstraints": "Fees/text()"
+                }
+            },
+            "accessConstraints": {
+                "_asArray": true,
+                "_path": "Service",
+                "_data": {
+                    "otherConstraints": "AccessConstraints/text()"
+                }
+            }
+        }
+    }
+}

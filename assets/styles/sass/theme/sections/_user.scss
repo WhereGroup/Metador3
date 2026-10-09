@@ -1,0 +1,95 @@
+@import '../config';
+@import '../mixins';
+
+.md .user {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    display: block;
+    float: left;
+    margin: 10px 5px;
+
+    @include userSelect(none);
+
+    .user-menu {
+        $menu-width: 300px;
+        display: none;
+        width: $menu-width;
+        background-color: $white;
+        line-height: 30px;
+        padding: $padding;
+        border: 1px solid $border;
+        border-radius: 2px;
+        box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.1);
+
+        @include pos('', -1px, '', '');
+
+        &:after, &:before {
+            position: absolute;
+            bottom: 100%;
+            left: $menu-width - 40px;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            pointer-events: none;
+        }
+
+        &:after {
+            border-color: rgba(255, 255, 255, 0);
+            border-bottom-color: #ffffff;
+            border-width: 8px;
+            margin-left: -8px;
+        }
+
+        &:before {
+            border-color: rgba(82, 82, 82, 0);
+            border-bottom-color: $border;
+            border-width: 9px;
+            margin-left: -9px;
+        }
+    }
+
+    &.active {
+        .user-menu {
+            display: block;
+        }
+    }
+}
+
+.md .user-btn {
+    padding: 0 10px;
+    @include large-item(false, false);
+
+    &:hover {
+        background-color: darken($background, 3%);
+    }
+}
+
+.md .user-image {
+    display: inline-block;
+
+    & > .image {
+        vertical-align: middle;
+        padding: 8px;
+        background-color: darken($background, 5%);
+        border-radius: 50%;
+    }
+
+    & > img.image {
+        height: 30px;
+        width: 30px;
+        padding: 0;
+    }
+}
+
+.md .user-name {
+    clear: both;
+    display: inline-block;
+    font-size: 0.9em;
+}
+
+.md .top-right-menu {
+    display: inline-block;
+}
+

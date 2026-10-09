@@ -1,0 +1,67 @@
+{% extends 'admin/template.html.twig' %}
+
+{% block title %}Import/Export{% endblock %}
+
+{% block content %}
+    <div class="content-title">
+        <h1 class="title dm">{% trans %}Import/Export{% endtrans %}</h1>
+    </div>
+    <div class="text-right">
+        <a href="{{ path('metador_import_index') }}" class="btn info medium" data-handle="">
+            <span class="icon-plus"></span> {% trans %}WMS-/WFS-Import{% endtrans %}
+        </a>
+        <a href="{{ path('metador_admin_import_new', { operation: 'import' }) }}" class="btn info medium">
+            <span class="icon-plus"></span> {% trans %}Import{% endtrans %}
+        </a>
+        <a href="{{ path('metador_admin_import_new', { operation: 'export' }) }}" class="btn info medium">
+            <span class="icon-plus"></span> {% trans %}Export{% endtrans %}
+        </a>
+    </div>
+
+    <hr class="line-separator" />
+
+    <table class="table bordered">
+        <thead>
+            <tr>
+                <th>{% trans %}Titel{% endtrans %}</th>
+                <th>{% trans %}Letzte Ausführung{% endtrans %}</th>
+                <th class="icon-column">#</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in rows  %}
+            <tr>
+                <td>
+                    {% if row.importFolder is not empty %}
+                        <a href="{{ path('metador_admin_import_edit', {'id': row.id, operation: 'import' }) }}">{{ row.title }}</a>
+                    {% elseif row.exportFolder is not empty %}
+                        <a href="{{ path('metador_admin_import_edit', {'id': row.id, operation: 'export' }) }}">{{ row.title }}</a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if row.lastRun is defined and row.lastRun is not empty %}
+                        {{ row.lastRun|date('H:i ' ~ get_setting('date_format', 'plugin', 'metador_core')) }}
+                    {% endif %}
+                </td>
+                <td class="icon-column process">
+                    {% set handle = 'import-' ~ row.id %}
+                    {% if row.importFolder is not empty %}
+                        <form action="{{ path('metador_admin_import_run', { id: row.id, handle: handle }) }}" data-bg-process="{{ handle }}" method="post">
+                            <button type="submit" class="btn no-style" data-bg-process-button="" disabled>
+                                <span class="icon-pause" data-bg-process-icon="icon-play"></span>
+                            </button>
+                        </form>
+                    {% elseif row.exportFolder is not empty %}
+                        {% set handle = 'export-' ~ row.id %}
+                        <form action="{{ path('metador_admin_export_run', { id: row.id, handle: handle }) }}" data-bg-process="{{ handle }}" method="post">
+                            <button type="submit" class="btn no-style" data-bg-process-button="" disabled>
+                                <span class="icon-pause" data-bg-process-icon="icon-play"></span>
+                            </button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

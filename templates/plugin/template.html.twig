@@ -1,0 +1,17 @@
+{% extends 'theme/template.html.twig' %}
+{% import 'plugin/macro.html.twig' as pluginView %}
+
+{% block center %}
+    <div class="page-content">
+        {% include 'theme/notify.html.twig' %}
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}
+
+{% block plugin_menu %}
+    <li>
+        <a href="{{ path('metador_admin_plugin') }}">
+            <span class="icon-redo2"></span> {% trans %}zurück{% endtrans %}
+        </a>
+    </li>
+{% endblock %}

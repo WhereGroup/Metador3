@@ -1,0 +1,58 @@
+# Proxy values are loaded from the ignored `.env.proxy.local` file via `bin/compose`.
+x-proxy-env: &proxy-env
+    http_proxy:
+    https_proxy:
+    no_proxy:
+    HTTP_PROXY:
+    HTTPS_PROXY:
+    NO_PROXY:
+
+services:
+    php:
+        restart: unless-stopped
+        container_name: metador3
+        environment: *proxy-env
+        env_file:
+            - ./.env.local
+        build:
+            context: ./docker
+            args:
+                <<: *proxy-env
+                var_timezone: ${TIMEZONE:-Europe/Berlin}
+                var_uid: ${CURRENT_UID:-1000}
+                var_gid: ${CURRENT_GID:-1000}
+        volumes:
+            - ./:/var/www/app:rw
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        ports:
+            - "80:80"
+    solr:
+        restart: unless-stopped
+        container_name: metador3-solr
+        env_file:
+            - ./.env.local
+        image: solr:9.7.0-slim
+        user: "${CURRENT_UID:-1000}:${CURRENT_GID:-1000}"
+        ports:
+            - "8983:8983"
+        volumes:
+            - ./docker/volumes/solr:/var/solr
+            # JTS ins Solr-WEB-INF/lib mounten, damit Spatial4j die Klassen
+            # über den System-Classloader findet (per-core lib reicht nicht).
+            - ./docker/volumes/solr/lib/jts-core-1.20.0.jar:/opt/solr/server/solr-webapp/webapp/WEB-INF/lib/jts-core-1.20.0.jar:ro
+    database:
+        restart: unless-stopped
+        container_name: metador3-db
+        env_file:
+            - ./.env.local
+        image: postgres:${POSTGRES_VERSION:-15}-alpine
+        healthcheck:
+            test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}"]
+            timeout: 5s
+            retries: 5
+            start_period: 60s
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./docker/volumes/postgresql:/var/lib/postgresql/data:rw

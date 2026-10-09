@@ -1,0 +1,19 @@
+@import '../config';
+
+.md {
+
+    .line-separator {
+        border: 0;
+        border-top: 1px solid lighten($border, 5%);
+        padding: 0;
+        margin: $padding 0;
+    }
+
+    .rs {
+        box-shadow: 9px 1px 0px -8px lighten($border, 8%);
+    }
+
+    .ls {
+        box-shadow: -9px 1px 0px -8px lighten($border, 8%);
+    }
+}

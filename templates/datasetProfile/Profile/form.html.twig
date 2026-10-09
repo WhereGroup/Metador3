@@ -1,0 +1,76 @@
+{% extends 'basicProfile/template.html.twig' %}
+
+{% set menu = {
+    'metadata': {
+        'label': 'Metadateneigenschaften',
+        'templates': {
+            'metadata': {
+                'label': 'Metadateneigenschaften',
+                'path': 'basicProfile/Profile/metadata.html.twig'
+            }
+        }
+    },
+    'dataproperties': {
+        'label': 'Dateneigenschaften',
+        'templates': {
+            'dataproperties-description': {
+                'label': 'Beschreibung',
+                'path': 'basicProfile/Profile/dataproperties-description.html.twig'
+            },
+            'dataproperties-spatial-timereference': {
+                'label': 'Raum- und Zeitbezug',
+                'path': 'datasetProfile/Profile/dataproperties-spatial-timereference.html.twig'
+            },
+            'dataproperties-classification': {
+                'label': 'Klassifizierung',
+                'path': 'basicProfile/Profile/dataproperties-classification.html.twig'
+            },
+            'dataproperties-format': {
+                'label': 'Formate',
+                'path': 'basicProfile/Profile/dataproperties-format.html.twig'
+            }
+        }
+    },
+    'constraints': {
+        'label': 'Rechtliches',
+        'templates': {
+            'constraints-description': {
+                'label': 'Rechtliches',
+                'path': 'basicProfile/Profile/distribution-constraints.html.twig'
+            },
+            'constraints-description': {
+                'label': 'Rechtliches',
+                'path': 'basicProfile/Profile/distribution-constraints.html.twig'
+            },
+            'qualityindication-conformity': {
+                'label': 'Übereinstimmung',
+                'path': 'basicProfile/Profile/qualityindication-conformity.html.twig'
+            }
+        }
+    },
+    'responsibility': {
+        'label': 'Verantwortlichkeit',
+        'templates': {
+            'responsibility-responsibleParty': {
+                'label': 'Datensatz',
+                'path': 'basicProfile/Profile/responsibility-responsibleParty.html.twig'
+            },
+            'responsibility-contact': {
+                'label': 'Metadaten',
+                'path': 'basicProfile/Profile/responsibility-contact.html.twig'
+            }
+        }
+    }
+}%}
+
+{% block leftMenu %}
+    {% include 'basicProfile/Element/menu.html.twig' with {'menu' : menu} %}
+{% endblock %}
+
+{% block profileMenu %}
+    {% include 'basicProfile/Element/subMenu.html.twig' with {'menu' : menu} %}
+{% endblock %}
+
+{% block content %}
+    {% include 'basicProfile/Element/menuContent.html.twig' with {'menu' : menu} %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% set BASEDIR = app.request.basepath %}
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        {% block css %}
+        {% endblock %}
+        {% block meta %}
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+            <meta name="description" content="{% block description %}{% endblock %}">
+            <meta name="viewport" content="width=device-width">
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ asset('build/images/favicon.ico') }}" type="image/png" />
+        {% block javascript %}
+            <script type="text/javascript">
+                var Configuration = {
+                    'basedir': '{{ BASEDIR }}/',
+                    'maxlifetime': '{{ session_maxlifetime() }}',
+                    'settings': {
+                        {% for key, value in get_frontend_settings() %}
+                            '{{ key }}': '{{ value }}'{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                    },
+                    'config': {
+                        {% for key, value in applicationGet('app-configuration') %}
+                        '{{ key }}': {{ value|raw }}{% if not loop.last %},{% endif %}
+
+                        {% endfor %}
+                    }
+                };
+            </script>
+        {% endblock %}
+    </head>
+    <body>
+    {% block body %}{% endblock %}
+    </body>
+</html>

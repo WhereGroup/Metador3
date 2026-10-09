@@ -1,0 +1,55 @@
+{% extends 'admin/template.html.twig' %}
+
+{% block title %}OGC API Records{% endblock %}
+
+{% block content %}
+    <div class="grid content-title">
+        <div class="row r-2">
+            <div class="col c-1-2">
+                <h1 class="title dm">{% trans %}OGC API Records{% endtrans %}</h1>
+            </div>
+            <div class="col c-1-2 text-right">
+                <a href="{{ path('metador_admin_api_records_new') }}" class="btn info medium">
+                    <span class="icon-plus"></span> {% trans %}Neu{% endtrans %}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="line-separator"/>
+
+    <table class="table bordered">
+        <thead>
+        <tr>
+            <th class="icon-column">#</th>
+            <th>{% trans %}Slug{% endtrans %}</th>
+            <th>{% trans %}Titel{% endtrans %}</th>
+            <th>{% trans %}Quelle{% endtrans %}</th>
+            <th class="icon-column">#</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for service in services %}
+            <tr>
+                <td class="icon-column">
+                    {% if service.active == true %}
+                        <span class="icon-checkbox-checked"></span>
+                    {% else %}
+                        <span class="icon-checkbox-unchecked"></span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('metador_admin_api_records_edit', {'slug': service.slug, 'source': service.source }) }}">{{ service.slug }}</a>
+                </td>
+                <td>{{ service.title }}</td>
+                <td>{{ service.source }}</td>
+                <td>
+                    <a href="{{ path('apirecords_index', {'source': service.source, 'slug': service.slug, 'f': 'application/json' }) }}" target="_blank">
+                        <span class="icon-earth"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

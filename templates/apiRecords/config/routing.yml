@@ -1,0 +1,4 @@
+api_records:
+    resource: "@ApiRecordsBundle/Controller/"
+    type:     annotation
+    prefix:   /

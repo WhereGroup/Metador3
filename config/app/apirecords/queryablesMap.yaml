@@ -1,0 +1,15 @@
+# default parameter mapping
+datetime: insertTime
+# system parameter mapping
+public: public
+# queryables parameter mapping
+title: title
+id: id
+fileidentifier: id
+description: abstract
+hierarchylevel: hierarchyLevel
+topiccategory: topicCategory
+geometry: geometry
+created: insertTime
+updated: date
+keywords: keywords

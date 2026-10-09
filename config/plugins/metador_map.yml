@@ -1,0 +1,63 @@
+metador_map:
+    active: true
+    origin: WhereGroup
+    name: Map
+    description: Map Bundle für Metador
+    class_name: MetadorMapBundle
+    template_path: map
+    version: '1.0'
+    settings:
+        map_crs:
+            frontend: true
+            type: choice
+            label: 'Standard Koordinatensystem'
+            default: 'EPSG:4326'
+            description: 'Liste der unterstützten Koordinatenreferenzsystemen'
+            options:
+                'EPSG:4326': 'EPSG:4326'
+                'EPSG:4258': 'EPSG:4258'
+                'EPSG:31466': 'EPSG:31466'
+                'EPSG:31467': 'EPSG:31467'
+                'EPSG:25832': 'EPSG:25832'
+        map_bbox_start:
+            frontend: true
+            type: string
+            label: 'BBOX Startausdehnung'
+            default: '9,49,11,53'
+            description: 'Bounding Box Startausdehnung'
+        map_bbox_max:
+            frontend: true
+            type: string
+            label: 'BBOX Maximale Ausdehnung'
+            default: '6,47,14,56'
+            description: 'Bounding Box Maximale Ausdehnung'
+        map_scales:
+            frontend: true
+            type: string
+            label: 'Scales'
+            default: '5000, 25000, 50000, 100000, 200000, 250000, 500000, 1000000, 1250000, 2500000, 3750000, 5000000'
+            description: 'Komma separierte Liste von Scales'
+        highlight_fill:
+            frontend: true
+            type: string
+            label: 'Highlight-Fläche'
+            default: 'rgba(60, 60, 255, 0.1)'
+            description: 'Farbe der Fläche die beim highlighting angezeigt wird'
+        highlight_stroke:
+            frontend: true
+            type: string
+            label: 'Highlight-Rahmen'
+            default: 'rgba(60, 60, 255, 1.0)'
+            description: 'Farbe des Rahmens der beim highlighting angezeigt wird'
+        search_fill:
+            frontend: true
+            type: string
+            label: 'Suchfilter-Fläche'
+            default: 'rgba(255, 60, 60, 0.1)'
+            description: 'Farbe der Fläche die beim erstellen von Suchfiltern angezeigt wird'
+        search_stroke:
+            frontend: true
+            type: string
+            label: 'Suchfilter-Rahmen'
+            default: 'rgba(255, 60, 60, 1.0)'
+            description: 'Farbe des Rahmens der beim erstellen von Suchfiltern angezeigt wird'

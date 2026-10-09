@@ -1,0 +1,269 @@
+@import '../config';
+@import '../mixins';
+@import '../extensions';
+
+$home-top: $header-height + $padding;
+$map-height: 400px;
+$home-menu-height: 35px;
+
+.md .map-dialog {
+    position: relative;
+    height: $map-height;
+    border: 1px solid $border;
+    border-radius: $border-radius;
+    background-color: $content;
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.03);
+    display: none;
+
+
+    &.active {
+        display: block;
+    }
+
+    & > .map {
+        @include pos(0, 0, 0, 0);
+    }
+
+    .map-dialog-left-menu {
+        border-right: 1px solid $primary;
+        z-index: 1;
+        width: 0px;
+        background-color: $white;
+
+        @include pos(0, '', 0, 0);
+        @include transition-all(150ms);
+
+        .map-dialog-left-content {
+            background-color: $white;
+            border-right: 1px solid $primary;
+            display: none;
+            @include pos(0, 0, 0, 0);
+        }
+
+        .map-dialog-left-menu-button {
+            z-index: 2;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+            height: 30px;
+            width: 30px;
+            border: 1px solid $primary;
+            position: absolute;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+            left: 0px;
+            background: $primary;
+            color: $white;
+            font-weight: bold;
+            @include calc('top', '50% - 15px');
+            @include transition-all(150ms);
+        }
+
+        &.active {
+            width: 300px;
+
+            & > .map-dialog-left-menu-button {
+                left: 299px;
+            }
+
+            & .map-dialog-left-content {
+                display: block;
+            }
+        }
+    }
+}
+
+.md .home {
+    border: 1px solid $border;
+    border-radius: $border-radius;
+    background-color: $content;
+    z-index: 1;
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.03);
+
+    position: relative;
+}
+
+.md .source {
+    display: block;
+    z-index: 2;
+
+    & > .source-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-bottom: 1px solid $border;
+        background-color: $dialog-head;
+        @extend .clearfix;
+
+        & > .source-list-item {
+            display: block;
+            float: left;
+            border-width: 1px 1px 0 1px;
+            border-color: darken(#f3f5f6, 10%);
+            border-style: solid;
+            margin-left: 5px;
+            margin-top: 5px;
+            background-color: $title;
+
+            height: 35px;
+            line-height: 35px;
+            padding: 0 $padding;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            @include userSelect(none);
+
+            &.active {
+                border-color:$border;
+                background-color: $content;
+                position: relative;
+                bottom: -1px;
+            }
+        }
+    }
+}
+
+.md .profile-menu {
+    text-align: right;
+    border-bottom: 1px solid $border;
+    display: none;
+
+    @include large-item(false);
+
+    &.active {
+        display: block;
+    }
+}
+
+.md .profile-menu-dialog {
+    display: none;
+}
+
+.md .profile-menu-item {
+    display: block;
+    padding:10px;
+
+    &:hover {
+        background-color: $background;
+    }
+}
+
+.md .layer-tree-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+     & > .draggable {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-user-drag: element;
+        cursor: move;
+
+        &:not(.dummy) {
+            border-bottom: 1px solid $border;
+        }
+
+        &.move {
+            background-color: lighten($info, 30%);
+            margin-left: 10px;
+        }
+    }
+
+    & > .disabled {
+        text-decoration: line-through;
+        color: $border;
+    }
+
+    > li[id] {
+        .form-label {
+            margin-left: 4px;
+        }
+    }
+}
+
+.md .map-source-opacity {
+    float: right;
+    padding: 0;
+    font-size: 0.7em;
+}
+
+.md .file-upload {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+
+    & > input.upload {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        height: $medium-item-height;
+    }
+}
+
+$search-content-left-width: 250px;
+
+.md .search-content {
+    padding: $padding;
+    min-height: 600px;
+    z-index: 1;
+
+    @extend .clearfix;
+
+    & > .search-content-left {
+        float: left;
+        width: $search-content-left-width;
+        border: 1px solid red;
+        padding: $padding;
+    }
+
+    & > .search-content-right {
+        border: 1px solid green;
+        margin-left: $search-content-left-width;
+        padding: $padding;
+    }
+}
+
+.md .filter-wrapper {
+    border: 1px solid $border;
+    border-radius: 4px;
+    margin-bottom: $padding;
+
+    & > .filter-header {
+        @include medium-item();
+        font-weight: bold;
+        border-bottom: 2px solid $primary;
+    }
+
+    & > .filter-content {
+        padding: $padding/2 0;
+        @extend .clearfix;
+
+        & > .filter-content-row {
+            cursor: pointer;
+
+            @extend .no-user-select;
+            @include medium-item();
+            min-height: $medium-item-height;
+            height: auto;
+
+            &:not(.no-hower):hover {
+                background-color: $background;
+            }
+        }
+    }
+}
+
+::-webkit-file-upload-button {
+    cursor:pointer;
+}

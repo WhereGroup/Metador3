@@ -1,0 +1,119 @@
+@import '../config';
+@import '../mixins';
+@import '../extensions';
+
+
+.md .table {
+    width: 100%;
+    border-collapse: collapse;
+
+    &.bordered {
+        border: 1px solid $border;
+    }
+
+    & > thead > tr > th {
+        border-bottom: 2px solid $primary;
+        background-color: darken($background, 3%);
+        height: $normal-item-height;
+        line-height: $normal-item-height;
+
+        &.icon-column {
+            width: $normal-item-height;
+            text-align: center;
+        }
+
+        &:not(:last-child) {
+            border-right: 1px solid $border;
+        }
+    }
+
+    & > tbody {
+        & > tr {
+            height: $normal-item-height;
+            line-height: $normal-item-height;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid $border;
+            }
+
+            & > td {
+                padding: 0 $padding;
+
+                &.c1-3 {
+                    width: 33.333%;
+                }
+
+                &.no-p {
+                    padding: 0;
+                }
+
+                &:not(:last-child) {
+                    border-right: 1px solid $border;
+                }
+
+                &.icon-column {
+                    width: $normal-item-height;
+                    padding: 0;
+                    text-align: center;
+                }
+            }
+
+            &:not(.no-bg):nth-child(1n) > td {
+                background-color: $background;
+            }
+
+            &:not(.no-bg):nth-child(2n) > td {
+                background-color: lighten($background, 2%);
+            }
+
+            &:not(.no-bg):nth-child(1n).error > td {
+                background-color: lighten($error, 40%);
+                &.icon-column {
+                    color: $error;
+                }
+            }
+
+            &:not(.no-bg):nth-child(2n).error > td {
+                background-color: lighten($error, 42%);
+                &.icon-column {
+                    color: $error;
+                }
+            }
+
+            &:not(.no-bg):nth-child(1n).info > td {
+                background-color: lighten($info, 40%);
+                &.icon-column {
+                    color: $info;
+                }
+            }
+
+            &:not(.no-bg):nth-child(2n).info > td {
+                background-color: lighten($info, 42%);
+                &.icon-column {
+                    color: $info;
+                }
+            }
+        }
+    }
+
+    &.small {
+        font-size: $font-small;
+        & > thead > tr > th.icon-column {
+            width: $small-item-height;
+        }
+    }
+
+    &.medium {
+        font-size: $font-medium;
+        & > thead > tr > th.icon-column {
+            width: $medium-item-height;
+        }
+    }
+
+    &.large {
+        font-size: $font-large;
+        & > thead > tr > th.icon-column {
+            width: $large-item-height;
+        }
+    }
+}

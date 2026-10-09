@@ -1,0 +1,52 @@
+{% import 'basicProfile/Makro/form.html.twig' as form_element %}
+
+{% if keyword is not empty %}
+    {% set readonly = false %}
+    {% set inherited = false %}
+
+    <div class="fieldset2 -js-multi-fieldset" data-count="{{ array_length(p, 'keywords:' ~ keyword.identifier ~ ':keywords', [{}]) }}">
+        <div class="head">
+            <div class="left">
+                {{ keyword.title }}:
+            </div>
+            <div class="right">
+                {% if not readonly %}
+                    <span class="icon medium icon-plus -js-multi-fieldset-add"></span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="rows -js-multi-fieldset-rows">
+            <input type="hidden" name="p[keywords][{{ keyword.identifier }}][name]" value="{{ keyword.title }}" />
+            <input type="hidden" name="p[keywords][{{ keyword.identifier }}][date]" value="{{ keyword.date|date('Y-m-d') }}" />
+            <input type="hidden" name="p[keywords][{{ keyword.identifier }}][type]" value="{{ keyword.dateType }}" />
+            {% for key in 0 .. array_length(p, 'keywords:' ~ keyword.identifier ~ ':keywords', [{}]) -1 %}
+                <div class="row -js-multi-field-row {% if loop.index0 == 0 %}-js-multi-fieldset-default-row{% endif %}">
+                    <div class="row-content">
+                        <div class="grid space responsive">
+                            <div class="row r-1">
+                                <div class="col c-1">
+                                    {{ form_element.select({
+                                        'name'    : 'p[keywords][' ~ keyword.identifier ~ '][keywords][' ~ key ~ ']',
+                                        'default' : '',
+                                        'options' : keyword.keywords,
+                                        'type'    : keyword.cardinality,
+                                        'validatorSources': validatorSources,
+                                        'readonly' : readonly,
+                                        'inherited' : inherited,
+                                        'p'       : p
+                                        })
+                                    }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-icon -js-multi-fieldset-icons">
+                        {% if loop.index0 > 0 and not readonly %}
+                            <span class="icon icon-bin2 -js-multi-fieldset-remove"></span>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
